@@ -172,6 +172,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
+  background: url(./images/FundoLogin.png) no-repeat center center fixed;
 }
 
 .cadastro-container {

@@ -1,4 +1,5 @@
 <template>
+  <div class="fundo">
   <div class="login-container">
     <div class="login-header">
       <h1>Iniciar Sessão</h1>
@@ -21,6 +22,7 @@
       </div>
     </div>
   </div>
+</div> 
 </template>
 
 <script>
@@ -56,22 +58,33 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
+  
 }
+
+.fundo{
+  height: 100vh;
+  margin-top: auto;
+  margin: 0;
+  padding: 0;
+  background: url(./images/FundoLogin.png) no-repeat center center fixed ; 
+  background-size: cover;
+}
+
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
+
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-size: cover;
 }
+
 
 .login-container {
   width: 400px;
@@ -80,6 +93,8 @@ body {
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-left: 500px;
+  margin-top: 150px;
 }
 
 .login-header h1 {
