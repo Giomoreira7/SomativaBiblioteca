@@ -1,14 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Login from './components/Login.vue';   // Página de login
-import Registrar from './components/Register.vue';   // Página de registro
-import RegistrarLivro from './components/RegistrarLivro.vue';  // Página de registrar livro
+import Login from './components/Login.vue';       // Página de login
+import Registrar from './components/Register.vue'; // Página de registro
+import RegistrarLivro from './components/RegistrarLivro.vue'; // Página de registrar livro
+import Home from './views/Home.vue';              // Página inicial
 
 const routes = [
   {
     path: '/',
+    name: 'Home',
+    component: Home,   // Página inicial
+  },
+  {
+    path: '/login',
     name: 'Login',
-    component: Login,  // Página de Login
+    component: Login,   // Página de Login
   },
   {
     path: '/registrar',
