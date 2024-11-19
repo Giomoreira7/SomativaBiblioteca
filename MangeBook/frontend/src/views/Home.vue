@@ -7,7 +7,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="#login">Login</a></li>
+          <li><a href="/Login">Login</a></li>
           <li><a href="#sobre">Sobre</a></li>
         </ul>
       </nav>
@@ -28,27 +28,60 @@
         <h2>Indicação do Mês</h2>
       </div>
       <div class="indicacao-imagens">
-        <img src="path/to/image1.jpg" alt="Imagem 1" />
-        <img src="path/to/image2.jpg" alt="Imagem 2" />
-        <img src="path/to/image3.jpg" alt="Imagem 3" />
-        <img src="path/to/image4.jpg" alt="Imagem 4" />
-        <img src="path/to/image5.jpg" alt="Imagem 5" />
+        <img src="../components/images/Imagem1.jpg" alt="Imagem 1" />
+        <img src="../components/images/Imagem2.jpg" alt="Imagem 2" />
+        <img src="../components/images/Imagem3.jpg" alt="Imagem 3" />
+        <img src="../components/images/Imagem4.jpg" alt="Imagem 4" />
+        <img src="../components/images/Imagem5.jpg" alt="Imagem 5" />
+        <img src="../components/images/Imagem6.jpg" alt="Imagem 6" />
+        <img src="../components/images/Imagem7.jpg" alt="Imagem 7" />
+        <img src="../components/images/Imagem8.jpg" alt="Imagem 8" />
       </div>
     </section>
 
     <!-- Categorias -->
     <section class="categorias">
       <h2 class="categorias-titulo">Categorias</h2> <!-- Título "Categorias" -->
-      <div class="categorias-botoes">
-        <button class="categoria">Ficção</button>
-        <button class="categoria">Mistério</button>
-        <button class="categoria">Romance</button>
-        <button class="categoria">Ciência</button>
-        <button class="categoria">História</button>
-      </div>
+<div class="categorias-botoes">
+  <!-- Botões para categorias, todos usando o método Vue para navegação -->
+  <button @click="goToCategory" class="categoria">Ficção</button>
+  <button @click="goToCategory" class="categoria">Mistério</button>
+  <button @click="goToCategory" class="categoria">Romance</button>
+  <button @click="goToCategory" class="categoria">Ciência</button>
+  <button @click="goToCategory" class="categoria">História</button>
+</div>
+
     </section>
+
+    <!-- Clube da Leitura -->
+    <section class="clube-leitura">
+      <h2 class="clube-titulo">Clube da Leitura</h2>
+      <div class="clube-imagens">
+        <img src="../components/images/Book1.png" alt="Livro 1" />
+      </div>
+      <p class="clube-texto"> Invenção de Orfeu,
+Jorge de Lima
+
+Uma epopeia moderna que dialoga com os maiores poetas da humanidade! </p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <p>
+        A Biblioteca da Escola e Faculdade de Tecnologia SENAI "Roberto Mange" tem por finalidade organizar e disseminar informações, oferecendo subsídios às atividades de ensino e pesquisa de toda comunidade escolar.
+      </p>
+      <p>
+        <strong>Horário de atendimento:</strong><br>
+        Segunda a sexta: das 08h às 17h e das 18h às 20h<br>
+        Sábados: das 08h às 13h15
+      </p>
+      <div class="footer-logo">
+        <img src="../components/images/senai-logo.png" alt="Logo do SENAI" />
+      </div>
+    </footer>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -67,10 +100,14 @@ export default {
     searchBooks() {
       // Lógica de pesquisa de livros
       console.log("Buscando por:", this.searchQuery);
-    }
+    },
+    goToCategory(){
+        this.$router.push({ name: 'catalago' });
+      }
   }
 };
 </script>
+
 <style scoped>
 /* Estilo do Cabeçalho */
 header {
@@ -84,13 +121,6 @@ header {
 
 header .logo img {
   height: 70px;
-}
-
-header {
-  display: flex;
-  justify-content: space-between; /* Distribui o espaço entre a navegação e a barra de pesquisa */
-  align-items: center; /* Alinha os itens verticalmente ao centro */
-  padding: 20px; /* Adiciona padding ao header */
 }
 
 header nav ul {
@@ -150,7 +180,6 @@ section {
   text-align: left;
 }
 
-
 #sobre {
   background-image: url('../components/images/FundoTela01.png'); /* Caminho da sua imagem */
   background-size: cover;  /* Faz a imagem cobrir toda a seção */
@@ -162,43 +191,6 @@ section {
   height: 70vh;
 }
 
-#sobre h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-#sobre p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-section#login {
-  background-color: #f39c12;
-  color: white;
-}
-
-section#login form {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-}
-
-section#login input {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  width: 200px;
-}
-
-section#login button {
-  padding: 10px 20px;
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 #indicacao-do-mes {
   text-align: center;
   padding: 40px 0;
@@ -208,9 +200,10 @@ section#login button {
 .indicacao-titulo h2 {
   font-size: 40px;
   color: #ffffff;
-  margin-bottom: 10px;
-  text-align: left; 
-  margin-left: 30px;
+  margin-bottom: 20px;
+  text-align: center; 
+  margin-left: 20px;
+  margin-top: 5px;
 }
 
 .indicacao-imagens {
@@ -223,13 +216,13 @@ section#login button {
   width: 150px;
   height: auto;
   border-radius: 10px; /* Bordas arredondadas para as imagens */
+  transition: transform 0.3s; /* Adiciona transição suave */
 }
 
-/* Estilos para as seções anteriores */
-section {
-  padding: 40px;
-  text-align: left;
+.indicacao-imagens img:hover {
+  transform: scale(1.1); /* Aumenta a imagem em 10% ao passar o mouse */
 }
+
 .categorias {
   margin-top: 40px;
   text-align: center;
@@ -251,7 +244,7 @@ section {
 }
 
 .categoria {
-  background-color:  #045A5B; /* Cor verde */
+  background-color: #045A5B; /* Cor verde */
   color: white;
   border: none;
   padding: 70px 200px;
@@ -262,7 +255,60 @@ section {
 }
 
 .categoria:hover {
-  background-color:  #45a0a1; /* Cor de hover mais clara */
+  background-color: #45a0a1; /* Cor de hover mais clara */
 }
 
+.clube-leitura {
+  text-align: center;
+   padding: 40px 0; 
+   background-color: #f5f5f5; 
+  } 
+  .clube-titulo { 
+    font-size: 40px; 
+    color: #045A5B;
+     margin-bottom: 20px; 
+     text-align: center; 
+    } 
+    .clube-imagens { 
+      display: flex; 
+      justify-content: center;
+       gap: 20px; 
+       /* Espaçamento entre as imagens */
+       } 
+       .clube-imagens img {
+         width: 600px; /* Ajuste o tamanho conforme necessário */ 
+         height: auto; 
+         border-radius: 10px; /* Bordas arredondadas para as imagens */ 
+         transition: transform 0.3s; /* Adiciona transição suave */ }
+          .clube-imagens img:hover { 
+            transform: scale(1.1); /* Aumenta a imagem em 10% ao passar o mouse */ } 
+            .clube-texto { 
+              font-size: 20px; 
+              color: #045A5B; 
+              margin-top: 10px; 
+              text-align: center;
+            }
+.footer {
+   padding: 20px; 
+   background-color: #045A5B; 
+   color: white; 
+   text-align: center; 
+   position: relative; 
+   bottom: 0; 
+   width: 100%;
+    }
+     .footer p { 
+      margin: 10px 0; 
+      font-size: 25px;
+      margin-left: 15px;
+      text-align: left;
+      } 
+      .footer-logo { 
+        margin-top: -150px; 
+        margin-left: 950px;
+        } 
+        .footer-logo img {
+           width: 250px; 
+           /* Ajuste a largura conforme necessário */ 
+           height: auto; }
 </style>

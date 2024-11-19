@@ -10,7 +10,7 @@
     <nav>
       <ul>
         <li><router-link to="/">Início</router-link></li>
-        <li><router-link to="/livros">Livros</router-link></li>
+        <li><router-link to="/book-list">Livros</router-link></li>
         <li><router-link to="/usuarios">Usuários</router-link></li>
         <li><router-link to="/relatorios">Relatórios</router-link></li>
         <li><router-link to="/configuracoes">Configurações</router-link></li>
@@ -255,17 +255,18 @@ main {
 }
 
 .botoes button {
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: 20px 30px;
+  background-color: #045A5B;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin:10px;
 }
 
 .botoes button:hover {
-  background-color: #0056b3;
+  background-color:  #487f80;
 }
 
 .avaliacoes .comentario {
@@ -288,7 +289,7 @@ main {
 
 .novo-comentario button {
   padding: 10px 15px;
-  background-color: #28a745;
+  background-color:  #045A5B;
   color: white;
   border: none;
   border-radius: 5px;
@@ -297,7 +298,7 @@ main {
 }
 
 .novo-comentario button:hover {
-  background-color: #218838;
+  background-color:  #487f80;
 }
 
 @media (max-width: 768px) {

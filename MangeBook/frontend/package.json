@@ -2,6 +2,7 @@
   "dependencies": {
     "@vue/compiler-sfc": "^3.5.12",
     "axios": "^1.7.7",
+    "swiper": "^11.1.15",
     "vue-router": "^4.4.5",
     "vue-template-compiler": "^2.6.14"
   },

@@ -5,23 +5,23 @@ import Login from './components/Login.vue';
 import Registrar from './components/Register.vue';
 import RegistrarLivro from './components/RegistrarLivro.vue';
 import Home from './views/Home.vue';
-import Dashboard from './components/Dashboard.vue';
+import Dashboard from '../src/views/Dashboard.vue';
 import MenuInicial from '../src/views/MenuIncial.vue';
 import BookList from './components/BookList.vue'; // Adicionando a importação do BookList
-
+import catalago from './components/catalago.vue';
 const routes = [
   {
-    path: '/dashboard',
+    path: '/ Dashboard',
     name: 'Dashboard',
     component: Dashboard,
   },
   {
-    path: '/home',
+    path: '/Home',
     name: 'Home',
     component: Home,
   },
   {
-    path: '/login',
+    path: '/Login',
     name: 'Login',
     component: Login,
   },
@@ -31,12 +31,12 @@ const routes = [
     component: Registrar,
   },
   {
-    path: '/registrar-livro',
+    path: '/RegistrarLivro',
     name: 'RegistrarLivro',
     component: RegistrarLivro,
   },
   {
-    path: '/',
+    path: '/MenuInicial',
     name: 'MenuInicial',
     component: MenuInicial,
   },
@@ -44,6 +44,11 @@ const routes = [
     path: '/book-list',  // Caminho para acessar a lista de livros
     name: 'BookList',
     component: BookList,  // O componente BookList será carregado aqui
+  },
+  {
+    path: '/',  // Caminho para acessar a lista de livros
+    name: 'Catalago',
+    component: catalago,  // O componente BookList será carregado aqui
   },
 ];
 

@@ -8,7 +8,7 @@
         </div>
         <nav>
           <ul>
-            <li><a href="#login">Pagina Inicial</a></li>
+            <li><a href="/Home.vue">Pagina Inicial</a></li>
           </ul>
         </nav>
       </header>
