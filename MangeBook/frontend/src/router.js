@@ -1,30 +1,49 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Login from './components/Login.vue';       // Página de login
-import Registrar from './components/Register.vue'; // Página de registro
-import RegistrarLivro from './components/RegistrarLivro.vue'; // Página de registrar livro
-import Home from './views/Home.vue';              // Página inicial
+// Importando os componentes
+import Login from './components/Login.vue';
+import Registrar from './components/Register.vue';
+import RegistrarLivro from './components/RegistrarLivro.vue';
+import Home from './views/Home.vue';
+import Dashboard from './components/Dashboard.vue';
+import MenuInicial from '../src/views/MenuIncial.vue';
+import BookList from './components/BookList.vue'; // Adicionando a importação do BookList
 
 const routes = [
   {
-    path: '/',
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+  },
+  {
+    path: '/home',
     name: 'Home',
-    component: Home,   // Página inicial
+    component: Home,
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login,   // Página de Login
+    component: Login,
   },
   {
-    path: '/registrar',
+    path: '/register',
     name: 'Registrar',
-    component: Registrar,  // Página de Registrar
+    component: Registrar,
   },
   {
-    path: '/registrar-livro',  // A nova rota para registrar livros
+    path: '/registrar-livro',
     name: 'RegistrarLivro',
-    component: RegistrarLivro,  // Componente RegistrarLivro
+    component: RegistrarLivro,
+  },
+  {
+    path: '/',
+    name: 'MenuInicial',
+    component: MenuInicial,
+  },
+  {
+    path: '/book-list',  // Caminho para acessar a lista de livros
+    name: 'BookList',
+    component: BookList,  // O componente BookList será carregado aqui
   },
 ];
 

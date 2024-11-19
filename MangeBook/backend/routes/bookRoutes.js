@@ -1,21 +1,32 @@
-// backend/routes/bookRoutes.js
 const express = require('express');
+const Book = require('../models/Book'); // Modelo para livros
 const router = express.Router();
-const bookController = require('../controllers/bookController');
 
-// Rota para registrar um novo livro
-router.post('/books', bookController.createBook);
+// Rota para obter todos os livros
+router.get('/books', async (req, res) => {
+  try {
+    const books = await Book.find();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-// Rota para listar todos os livros
-router.get('/books', bookController.getBooks);
+// Rota para adicionar um novo livro
+router.post('/books', async (req, res) => {
+  const book = new Book({
+    title: req.body.title,
+    author: req.body.author,
+    cover: req.body.cover,
+    // outros campos como ano de publicação, etc.
+  });
 
-// Rota para buscar um livro por ID
-router.get('/books/:id', bookController.getBookById);
-
-// Rota para atualizar um livro
-router.put('/books/:id', bookController.updateBook);
-
-// Rota para deletar um livro
-router.delete('/books/:id', bookController.deleteBook);
+  try {
+    const newBook = await book.save();
+    res.status(201).json(newBook);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 module.exports = router;

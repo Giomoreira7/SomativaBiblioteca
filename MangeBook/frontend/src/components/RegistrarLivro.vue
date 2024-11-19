@@ -1,75 +1,173 @@
 <template>
   <div>
-    <!-- Logo -->
     <header class="header">
+      <div class="logo">
+        <img src="../components/images/logo.png" alt="Logo da Biblioteca" />
+      </div>
       <h1>Detalhes do Livro</h1>
     </header>
 
-    <!-- Navegação -->
     <nav>
       <ul>
-        <li><a href="../public/inicio.html">Início</a></li>
-        <li><a href="#">Livros</a></li>
-        <li><a href="#">Usuários</a></li>
-        <li><a href="#">Relatórios</a></li>
-        <li><a href="#">Configurações</a></li>
+        <li><router-link to="/">Início</router-link></li>
+        <li><router-link to="/livros">Livros</router-link></li>
+        <li><router-link to="/usuarios">Usuários</router-link></li>
+        <li><router-link to="/relatorios">Relatórios</router-link></li>
+        <li><router-link to="/configuracoes">Configurações</router-link></li>
       </ul>
     </nav>
 
-    <!-- Conteúdo principal -->
     <main>
-      <!-- Detalhes do livro -->
       <section class="detalhes-livro">
-        <h2>Título do Livro</h2>
+        <h2>{{ livro.titulo }}</h2>
         <div class="informacoes-livro">
-          <img src="capa.jpg" alt="Capa do Livro" />
+          <img :src="livro.capa" alt="Capa do Livro" />
           <div class="informacoes">
-            <p><strong>Autor:</strong> Autor do Livro</p>
-            <p><strong>Descrição:</strong> Esta é uma breve descrição do livro, abordando seus principais pontos e temas.</p>
-            <p><strong>Ano de Publicação:</strong> 2023</p>
-            <p><strong>Gênero:</strong> Ficção</p>
-            <p><strong>ISBN:</strong> 978-3-16-148410-0</p>
-            <p><strong>Número de Cópias Disponíveis:</strong> 5</p>
+            <p><strong>Autor:</strong> {{ livro.autor }}</p>
+            <p><strong>Descrição:</strong> {{ livro.descricao }}</p>
+            <p><strong>Ano de Publicação:</strong> {{ livro.anoPublicacao }}</p>
+            <p><strong>Gênero:</strong> {{ livro.genero }}</p>
+            <p><strong>ISBN:</strong> {{ livro.isbn }}</p>
+            <p><strong>Número de Cópias Disponíveis:</strong> {{ livro.numeroCopias }}</p>
           </div>
         </div>
         <div class="botoes">
-          <button>Reservar Livro</button>
-          <button>Emprestar Livro</button>
-          <button>Editar Informações</button>
+          <button @click="reservarLivro">Reservar Livro</button>
+          <button @click="emprestarLivro">Emprestar Livro</button>
+          <button @click="editarInformacoes">Editar Informações</button>
         </div>
       </section>
 
-      <!-- Avaliações -->
       <section class="avaliacoes">
         <h3>Comentários e Avaliações</h3>
-        <div class="comentario">
-          <p><strong>Usuário 1:</strong> Excelente livro! Muito informativo.</p>
-          <p><strong>Avaliação:</strong> ★★★★☆</p>
+        <div v-for="comentario in comentarios" :key="comentario.id" class="comentario">
+          <p><strong>{{ comentario.usuario }}:</strong> {{ comentario.texto }}</p>
+          <p><strong>Avaliação:</strong> {{ comentario.avaliacao }}</p>
         </div>
-        <div class="comentario">
-          <p><strong>Usuário 2:</strong> Gostei, mas poderia ser mais longo.</p>
-          <p><strong>Avaliação:</strong> ★★★☆☆</p>
-        </div>
-        <!-- Adicione mais comentários conforme necessário -->
         <div class="novo-comentario">
           <h4>Deixe seu comentário:</h4>
-          <textarea placeholder="Digite seu comentário aqui..."></textarea>
-          <button>Enviar Comentário</button>
+          <textarea v-model="novoComentario" placeholder="Digite seu comentário aqui..."></textarea>
+          <button @click="enviarComentario">Enviar Comentário</button>
         </div>
       </section>
 
-      <!-- Histórico de empréstimos -->
       <section class="historico">
         <h3>Histórico de Empréstimos e Devoluções</h3>
         <ul>
-          <li>Usuário A - Empréstimo em 01/10/2023 - Devolvido em 15/10/2023</li>
-          <li>Usuário B - Empréstimo em 05/10/2023 - Devolvido em 20/10/2023</li>
-          <!-- Adicione mais histórico conforme necessário -->
+          <li v-for="emprestimo in historico" :key="emprestimo.id">
+            {{ emprestimo.usuario }} - Empréstimo em {{ emprestimo.dataEmprestimo }} - Devolvido em {{ emprestimo.dataDevolucao }}
+          </li>
         </ul>
       </section>
     </main>
   </div>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      livro: {},
+      comentarios: [],
+      novoComentario: '',
+      historico: [],
+    };
+  },
+  created() {
+    this.fetchLivro();
+    this.fetchComentarios();
+    this.fetchHistorico();
+  },
+  methods: {
+    // Método para buscar os dados do livro
+    fetchLivro() {
+      axios.get('http://seu-backend.com/api/livros/1')
+        .then(response => {
+          this.livro = response.data;
+        })
+        .catch(error => {
+          console.error('Erro ao buscar livro:', error);
+        });
+    },
+
+    // Método para buscar os comentários
+    fetchComentarios() {
+      axios.get('http://seu-backend.com/api/comentarios/livro/1')
+        .then(response => {
+          this.comentarios = response.data;
+        })
+        .catch(error => {
+          console.error('Erro ao buscar comentários:', error);
+        });
+    },
+
+    // Método para buscar histórico de empréstimos
+    fetchHistorico() {
+      axios.get('http://seu-backend.com/api/emprestimos/livro/1')
+        .then(response => {
+          this.historico = response.data;
+        })
+        .catch(error => {
+          console.error('Erro ao buscar histórico:', error);
+        });
+    },
+
+    // Método para reservar o livro
+    reservarLivro() {
+      axios.post('http://seu-backend.com/api/reservar', { livroId: this.livro.id })
+        .then(response => {
+          alert('Livro reservado com sucesso!');
+        })
+        .catch(error => {
+          console.error('Erro ao reservar livro:', error);
+        });
+    },
+
+    // Método para emprestar o livro
+    emprestarLivro() {
+      axios.post('http://seu-backend.com/api/emprestar', { livroId: this.livro.id })
+        .then(response => {
+          alert('Livro emprestado com sucesso!');
+        })
+        .catch(error => {
+          console.error('Erro ao emprestar livro:', error);
+        });
+    },
+
+    // Método para editar informações do livro
+    editarInformacoes() {
+      axios.put('http://seu-backend.com/api/livros/1', this.livro)
+        .then(response => {
+          alert('Informações do livro atualizadas!');
+        })
+        .catch(error => {
+          console.error('Erro ao editar livro:', error);
+        });
+    },
+
+    // Método para enviar um comentário
+    enviarComentario() {
+      if (this.novoComentario) {
+        const comentario = {
+          texto: this.novoComentario,
+          avaliacao: '★★★★★', // Defina a avaliação conforme necessário
+          livroId: this.livro.id,
+        };
+        axios.post('http://seu-backend.com/api/comentarios', comentario)
+          .then(response => {
+            this.comentarios.push(response.data);
+            this.novoComentario = ''; // Limpar campo
+          })
+          .catch(error => {
+            console.error('Erro ao enviar comentário:', error);
+          });
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 * {
@@ -80,17 +178,26 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color: #f4f4f4;
+  background-color:  #045A5B;
   padding: 0;
 }
 
 header {
-  background-color: #045A5B;
-  color: white;
+  background-color: #ffffff;
+  color: #045A5B;
   padding: 10px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+header .logo img {
+  height: 70px;
+}
+
+header h1 {
+  font-size: 24px;
+  color:  #045A5B;
 }
 
 nav ul {
@@ -99,7 +206,7 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: center;
-  background-color: #333;
+  background-color:  #045A5B;
 }
 
 nav ul li {
@@ -213,4 +320,5 @@ main {
     font-size: 24px;
   }
 }
+
 </style>

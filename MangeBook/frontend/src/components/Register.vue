@@ -90,7 +90,7 @@
     </form>
 
     <div class="cadastro-footer">
-      <p>Já possui uma conta? <a href="../components/LoginPage.vue" class="link-login">Faça login</a></p>
+      <p>Já possui uma conta? <a href="../components/Login.vue" class="link-login">Faça login</a></p>
     </div>
   </div>
 </template>
@@ -172,7 +172,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
-  background: url(./images/FundoLogin.png) no-repeat center center fixed;
+  background: url('./images/FundoLogin.png') no-repeat center center fixed;
 }
 
 .cadastro-container {

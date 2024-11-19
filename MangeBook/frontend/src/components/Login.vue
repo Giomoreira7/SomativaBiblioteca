@@ -63,23 +63,26 @@ export default {
 
 .fundo{
   height: 100vh;
-  margin-top: auto;
-  margin: 0;
   padding: 0;
-  background: url(./images/FundoLogin.png) no-repeat center center fixed ; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('./images/FundoLogin.png') no-repeat center center fixed;
   background-size: cover;
 }
 
 
 html, body {
   height: 100%;
-  margin: 0;
   padding: 0;
   font-size: 14px;
 
 }
 
 body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,8 +96,6 @@ body {
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-left: 500px;
-  margin-top: 150px;
 }
 
 .login-header h1 {
