@@ -18,11 +18,9 @@
     </header>
 
     <div class="catalog-body">
-     
-
       <!-- Exibição das categorias uma abaixo da outra -->
       <div class="category-list">
-        <div v-for="(category, index) in categories" :key="index" class="category-container">
+        <div v-for="(category, index) in filteredCategories" :key="index" class="category-container">
           <h3>{{ category.name }}</h3>
           <div class="book-list">
             <div v-for="book in category.books" :key="book.id" class="book-card">
@@ -31,7 +29,6 @@
                 <h4>{{ book.title }}</h4>
                 <p>{{ book.author }}</p>
                 <p>Disponibilidade: {{ book.available ? 'Disponível' : 'Indisponível' }}</p>
-                <button @click="viewBookDetails(book.id)">Ver Detalhes</button>
               </div>
             </div>
           </div>
@@ -45,11 +42,7 @@
 export default {
   data() {
     return {
-      filters: {
-        author: '',
-        genre: '',
-        date: ''
-      },
+      searchQuery: '',
       categories: [
         {
           name: 'Ficção',
@@ -133,10 +126,21 @@ export default {
       ]
     };
   },
+  computed: {
+    // Filtra as categorias de acordo com o parâmetro da URL
+    filteredCategories() {
+      const categoryParam = this.$route.params.category;
+      if (categoryParam) {
+        // Retorna a categoria correspondente ao parâmetro da URL
+        return this.categories.filter(category => category.name.toLowerCase() === categoryParam.toLowerCase());
+      }
+      return this.categories; // Se não houver parâmetro, mostra todas as categorias
+    }
+  },
   methods: {
-    viewBookDetails(bookId) {
-      // Lógica para visualizar os detalhes do livro
-      console.log('Visualizando detalhes do livro com ID:', bookId);
+    searchBooks() {
+      // Lógica para buscar livros, caso seja necessário implementar
+      console.log('Pesquisando por:', this.searchQuery);
     }
   }
 };

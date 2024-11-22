@@ -9,9 +9,10 @@ import Dashboard from '../src/views/Dashboard.vue';
 import MenuInicial from '../src/views/MenuIncial.vue';
 import BookList from './components/BookList.vue'; // Adicionando a importação do BookList
 import catalago from './components/catalago.vue';
+
 const routes = [
   {
-    path: '/ Dashboard',
+    path: '/Dashboard', // Corrigido o caminho
     name: 'Dashboard',
     component: Dashboard,
   },
@@ -46,9 +47,10 @@ const routes = [
     component: BookList,  // O componente BookList será carregado aqui
   },
   {
-    path: '/',  // Caminho para acessar a lista de livros
+    path: '/',  // Adicionando rota com parâmetro de categoria
     name: 'Catalago',
-    component: catalago,  // O componente BookList será carregado aqui
+    component: catalago,  // O componente Catalogo será carregado aqui
+    props: true, // Permite passar o parâmetro como uma prop
   },
 ];
 
