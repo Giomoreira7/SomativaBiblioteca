@@ -18,7 +18,7 @@
       <div class="cadastrar-container">
         <span>Não tem uma conta? </span>
         <!-- Usando router-link para redirecionar para a página de registro -->
-        <router-link to="/registrar" class="link-cadastrar">Cadastre-se</router-link>
+        <router-link to="/Register" class="link-cadastrar">Cadastre-se</router-link>
       </div>
     </div>
   </div>

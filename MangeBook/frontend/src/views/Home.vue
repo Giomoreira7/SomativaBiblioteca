@@ -9,6 +9,7 @@
         <ul>
           <li><a href="/Login">Login</a></li>
           <li><a href="#sobre">Sobre</a></li>
+          <li><a href="/Login">Administrador</a></li>
         </ul>
       </nav>
       <div class="search-bar">
