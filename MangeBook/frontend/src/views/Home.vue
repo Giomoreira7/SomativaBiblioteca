@@ -42,16 +42,15 @@
 
     <!-- Categorias -->
     <section class="categorias">
-      <h2 class="categorias-titulo">Categorias</h2> <!-- Título "Categorias" -->
-<div class="categorias-botoes">
-  <!-- Botões para categorias, todos usando o método Vue para navegação -->
-  <button @click="goToCategory" class="categoria">Ficção</button>
-  <button @click="goToCategory" class="categoria">Mistério</button>
-  <button @click="goToCategory" class="categoria">Romance</button>
-  <button @click="goToCategory" class="categoria">Ciência</button>
-  <button @click="goToCategory" class="categoria">História</button>
-</div>
-
+      <h2 class="categorias-titulo">Categorias</h2>
+      <div class="categorias-botoes">
+        <!-- Botões para todas as categorias, agora redirecionando para a página Catalogo -->
+        <button @click="goToCatalogo" class="categoria">Ficção</button>
+        <button @click="goToCatalogo" class="categoria">Mistério</button>
+        <button @click="goToCatalogo" class="categoria">Romance</button>
+        <button @click="goToCatalogo" class="categoria">Ciência</button>
+        <button @click="goToCatalogo" class="categoria">História</button>
+      </div>
     </section>
 
     <!-- Clube da Leitura -->
@@ -60,22 +59,13 @@
       <div class="clube-imagens">
         <img src="../components/images/Book1.png" alt="Livro 1" />
       </div>
-      <p class="clube-texto"> Invenção de Orfeu,
-Jorge de Lima
-
-Uma epopeia moderna que dialoga com os maiores poetas da humanidade! </p>
+      <p class="clube-texto">Invenção de Orfeu, Jorge de Lima. Uma epopeia moderna que dialoga com os maiores poetas da humanidade!</p>
     </section>
 
     <!-- Rodapé -->
     <footer class="footer">
-      <p>
-        A Biblioteca da Escola e Faculdade de Tecnologia SENAI "Roberto Mange" tem por finalidade organizar e disseminar informações, oferecendo subsídios às atividades de ensino e pesquisa de toda comunidade escolar.
-      </p>
-      <p>
-        <strong>Horário de atendimento:</strong><br>
-        Segunda a sexta: das 08h às 17h e das 18h às 20h<br>
-        Sábados: das 08h às 13h15
-      </p>
+      <p>A Biblioteca da Escola e Faculdade de Tecnologia SENAI "Roberto Mange" tem por finalidade organizar e disseminar informações, oferecendo subsídios às atividades de ensino e pesquisa de toda comunidade escolar.</p>
+      <p><strong>Horário de atendimento:</strong><br> Segunda a sexta: das 08h às 17h e das 18h às 20h<br> Sábados: das 08h às 13h15</p>
       <div class="footer-logo">
         <img src="../components/images/senai-logo.png" alt="Logo do SENAI" />
       </div>
@@ -87,24 +77,18 @@ Uma epopeia moderna que dialoga com os maiores poetas da humanidade! </p>
 export default {
   data() {
     return {
-      username: '',
-      password: '',
       searchQuery: ''
     };
   },
   methods: {
-    login() {
-      // Lógica de login
-      console.log("Usuário:", this.username);
-      console.log("Senha:", this.password);
-    },
     searchBooks() {
       // Lógica de pesquisa de livros
       console.log("Buscando por:", this.searchQuery);
     },
-    goToCategory(){
-        this.$router.push({ name: 'catalago' });
-      }
+    goToCatalogo() {
+      // Navega para a página do Catálogo
+      this.$router.push({ name: 'Catalogo' });
+    }
   }
 };
 </script>

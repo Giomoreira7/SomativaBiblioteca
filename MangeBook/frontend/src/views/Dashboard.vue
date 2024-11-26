@@ -16,7 +16,7 @@
         <li><router-link to="/configuracoes">Configurações</router-link></li>
       </ul>
     </nav>
-  </div>
+
     <div class="dashboard">
       <header>
         <div class="action-icons">
@@ -24,7 +24,7 @@
           <i class="fa fa-users" @click="manageUsers" title="Gerenciar Usuários"></i>
         </div>
       </header>
-  
+
       <section class="status-cards">
         <div class="card">
           <h2>Empréstimos</h2>
@@ -40,48 +40,49 @@
         </div>
       </section>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        loanStatus: '',
-        returnStatus: '',
-        reservationStatus: ''
-      };
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      loanStatus: '',
+      returnStatus: '',
+      reservationStatus: ''
+    };
+  },
+  mounted() {
+    this.fetchDashboardData();
+  },
+  methods: {
+    fetchDashboardData() {
+      axios.get('http://localhost:3000/api/dashboard')
+        .then(response => {
+          this.loanStatus = response.data.loanStatus;
+          this.returnStatus = response.data.returnStatus;
+          this.reservationStatus = response.data.reservationStatus;
+        })
+        .catch(error => {
+          console.error("Houve um erro ao buscar os dados: ", error);
+        });
     },
-    mounted() {
-      this.fetchDashboardData();
+    addBook() {
+      // Lógica para adicionar um novo livro
+      alert("Adicionar livro");
     },
-    methods: {
-      fetchDashboardData() {
-        axios.get('http://localhost:3000/api/dashboard')
-          .then(response => {
-            this.loanStatus = response.data.loanStatus;
-            this.returnStatus = response.data.returnStatus;
-            this.reservationStatus = response.data.reservationStatus;
-          })
-          .catch(error => {
-            console.error("Houve um erro ao buscar os dados: ", error);
-          });
-      },
-      addBook() {
-        // Lógica para adicionar um novo livro
-        alert("Adicionar livro");
-      },
-      manageUsers() {
-        // Lógica para gerenciar usuários
-        alert("Gerenciar usuários");
-      }
+    manageUsers() {
+      // Lógica para gerenciar usuários
+      alert("Gerenciar usuários");
     }
-  };
-  </script>
-  
-  <style scoped>
-  * {
+  }
+};
+</script>
+
+<style scoped>
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -89,7 +90,7 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color:  #045A5B;
+  background-color: #045A5B;
   padding: 0;
 }
 
@@ -108,7 +109,7 @@ header .logo img {
 
 header h1 {
   font-size: 24px;
-  color:  #045A5B;
+  color: #045A5B;
 }
 
 nav ul {
@@ -117,7 +118,7 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: center;
-  background-color:  #045A5B;
+  background-color: #045A5B;
 }
 
 nav ul li {
@@ -129,43 +130,37 @@ nav ul li a {
   text-decoration: none;
   font-size: 16px;
 }
-  .dashboard {
-    padding: 20px;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .action-icons i {
-    font-size: 24px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .status-cards {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .card {
-    background-color: #f4f4f4;
-    padding: 20px;
-    width: 30%;
-    text-align: center;
-    border-radius: 8px;
-  }
-  
-  .card h2 {
-    margin-bottom: 10px;
-  }
-  
-  .card p {
-    font-size: 18px;
-    color: #333;
-  }
-  </style>
-  
+
+.dashboard {
+  padding: 20px;
+}
+
+.action-icons i {
+  font-size: 24px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.status-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  width: 30%;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.card h2 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 18px;
+  color: #333;
+}
+</style>

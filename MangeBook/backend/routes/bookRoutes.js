@@ -1,32 +1,16 @@
 const express = require('express');
-const Book = require('../models/Book'); // Modelo para livros
 const router = express.Router();
 
-// Rota para obter todos os livros
-router.get('/books', async (req, res) => {
-  try {
-    const books = await Book.find();
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+// Exemplo de rota para listar todos os livros
+router.get('/', (req, res) => {
+  res.json({ mensagem: 'Lista de livros' });
 });
 
-// Rota para adicionar um novo livro
-router.post('/books', async (req, res) => {
-  const book = new Book({
-    title: req.body.title,
-    author: req.body.author,
-    cover: req.body.cover,
-    // outros campos como ano de publicação, etc.
-  });
-
-  try {
-    const newBook = await book.save();
-    res.status(201).json(newBook);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+// Exemplo de rota para adicionar um livro
+router.post('/', (req, res) => {
+  const newBook = req.body;
+  // lógica para adicionar o livro ao banco
+  res.status(201).json({ mensagem: 'Livro adicionado com sucesso', livro: newBook });
 });
 
 module.exports = router;

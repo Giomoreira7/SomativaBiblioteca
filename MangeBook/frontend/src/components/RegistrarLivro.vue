@@ -21,14 +21,7 @@
       <section class="detalhes-livro">
         <h2>{{ livro.titulo }}</h2>
         <div class="informacoes-livro">
-          <img :src="livro.capa" alt="Capa do Livro" />
           <div class="informacoes">
-            <p><strong>Autor:</strong> {{ livro.autor }}</p>
-            <p><strong>Descrição:</strong> {{ livro.descricao }}</p>
-            <p><strong>Ano de Publicação:</strong> {{ livro.anoPublicacao }}</p>
-            <p><strong>Gênero:</strong> {{ livro.genero }}</p>
-            <p><strong>ISBN:</strong> {{ livro.isbn }}</p>
-            <p><strong>Número de Cópias Disponíveis:</strong> {{ livro.numeroCopias }}</p>
           </div>
         </div>
         <div class="botoes">
@@ -38,6 +31,47 @@
         </div>
       </section>
 
+      <!-- Formulário para adicionar um novo livro -->
+      <section class="formulario-livro">
+        <h2>Adicionar Novo Livro</h2>
+        <form @submit.prevent="adicionarLivro">
+          <div>
+            <label for="titulo">Título:</label>
+            <input type="text" v-model="novoLivro.titulo" id="titulo" required />
+          </div>
+          <div>
+            <label for="autor">Autor:</label>
+            <input type="text" v-model="novoLivro.autor" id="autor" required />
+          </div>
+          <div>
+            <label for="descricao">Descrição:</label>
+            <textarea v-model="novoLivro.descricao" id="descricao" required></textarea>
+          </div>
+          <div>
+            <label for="anoPublicacao">Ano de Publicação:</label>
+            <input type="number" v-model="novoLivro.anoPublicacao" id="anoPublicacao" required />
+          </div>
+          <div>
+            <label for="genero">Gênero:</label>
+            <input type="text" v-model="novoLivro.genero" id="genero" required />
+          </div>
+          <div>
+            <label for="isbn">ISBN:</label>
+            <input type="text" v-model="novoLivro.isbn" id="isbn" required />
+          </div>
+          <div>
+            <label for="numeroCopias">Número de Cópias:</label>
+            <input type="number" v-model="novoLivro.numeroCopias" id="numeroCopias" required />
+          </div>
+          <div>
+            <label for="capa">Capa (URL):</label>
+            <input type="text" v-model="novoLivro.capa" id="capa" required />
+          </div>
+          <button type="submit" :disabled="isSubmitting">Adicionar Livro</button>
+        </form>
+      </section>
+
+      <!-- Seção de avaliações e histórico de empréstimos -->
       <section class="avaliacoes">
         <h3>Comentários e Avaliações</h3>
         <div v-for="comentario in comentarios" :key="comentario.id" class="comentario">
@@ -49,15 +83,6 @@
           <textarea v-model="novoComentario" placeholder="Digite seu comentário aqui..."></textarea>
           <button @click="enviarComentario">Enviar Comentário</button>
         </div>
-      </section>
-
-      <section class="historico">
-        <h3>Histórico de Empréstimos e Devoluções</h3>
-        <ul>
-          <li v-for="emprestimo in historico" :key="emprestimo.id">
-            {{ emprestimo.usuario }} - Empréstimo em {{ emprestimo.dataEmprestimo }} - Devolvido em {{ emprestimo.dataDevolucao }}
-          </li>
-        </ul>
       </section>
     </main>
   </div>
@@ -73,6 +98,17 @@ export default {
       comentarios: [],
       novoComentario: '',
       historico: [],
+      novoLivro: {
+        titulo: '',
+        autor: '',
+        descricao: '',
+        anoPublicacao: 0, // Inicializado com 0
+        genero: '',
+        isbn: '',
+        numeroCopias: 0, // Inicializado com 0
+        capa: ''
+      },
+      isSubmitting: false // Controle de submissão
     };
   },
   created() {
@@ -81,9 +117,8 @@ export default {
     this.fetchHistorico();
   },
   methods: {
-    // Método para buscar os dados do livro
     fetchLivro() {
-      axios.get('http://seu-backend.com/api/livros/1')
+      axios.get('http://5000/api/livros')
         .then(response => {
           this.livro = response.data;
         })
@@ -91,10 +126,8 @@ export default {
           console.error('Erro ao buscar livro:', error);
         });
     },
-
-    // Método para buscar os comentários
     fetchComentarios() {
-      axios.get('http://seu-backend.com/api/comentarios/livro/1')
+      axios.get('http://5000/api/comentarios/livro/1')
         .then(response => {
           this.comentarios = response.data;
         })
@@ -102,10 +135,8 @@ export default {
           console.error('Erro ao buscar comentários:', error);
         });
     },
-
-    // Método para buscar histórico de empréstimos
     fetchHistorico() {
-      axios.get('http://seu-backend.com/api/emprestimos/livro/1')
+      axios.get('http://5000/api/emprestimos/livro')
         .then(response => {
           this.historico = response.data;
         })
@@ -114,9 +145,30 @@ export default {
         });
     },
 
+    // Método para adicionar um novo livro
+    adicionarLivro() {
+      if (!this.validarAnoPublicacao()) {
+        alert('Ano de publicação inválido.');
+        return;
+      }
+
+      this.isSubmitting = true;
+      axios.post('http://5000/api/livros', this.novoLivro)
+        .then(response => {
+          alert('Livro adicionado ao catálogo com sucesso!');
+          this.livro = response.data;  // Atualiza o livro atual com o novo livro adicionado
+          this.isSubmitting = false;
+        })
+        .catch(error => {
+          console.error('Erro ao adicionar livro:', error);
+          alert('Erro ao adicionar livro. Tente novamente mais tarde.');
+          this.isSubmitting = false;
+        });
+    },
+
     // Método para reservar o livro
     reservarLivro() {
-      axios.post('http://seu-backend.com/api/reservar', { livroId: this.livro.id })
+      axios.post('http://5000/api/reservar', { livroId: this.livro.id })
         .then(response => {
           alert('Livro reservado com sucesso!');
         })
@@ -127,7 +179,7 @@ export default {
 
     // Método para emprestar o livro
     emprestarLivro() {
-      axios.post('http://seu-backend.com/api/emprestar', { livroId: this.livro.id })
+      axios.post('http://5000/api/emprestar', { livroId: this.livro.id })
         .then(response => {
           alert('Livro emprestado com sucesso!');
         })
@@ -138,7 +190,7 @@ export default {
 
     // Método para editar informações do livro
     editarInformacoes() {
-      axios.put('http://seu-backend.com/api/livros/1', this.livro)
+      axios.put('http://5000/api/livros/', this.livro)
         .then(response => {
           alert('Informações do livro atualizadas!');
         })
@@ -155,7 +207,7 @@ export default {
           avaliacao: '★★★★★', // Defina a avaliação conforme necessário
           livroId: this.livro.id,
         };
-        axios.post('http://seu-backend.com/api/comentarios', comentario)
+        axios.post('http://5000/api/comentarios', comentario)
           .then(response => {
             this.comentarios.push(response.data);
             this.novoComentario = ''; // Limpar campo
@@ -164,6 +216,11 @@ export default {
             console.error('Erro ao enviar comentário:', error);
           });
       }
+    },
+
+    // Função de validação do ano de publicação
+    validarAnoPublicacao() {
+      return this.novoLivro.anoPublicacao > 0 && this.novoLivro.anoPublicacao <= new Date().getFullYear();
     },
   },
 };
@@ -230,96 +287,20 @@ main {
 .detalles-livro, .avaliacoes, .historico {
   background-color: #fff;
   padding: 20px;
-  margin-bottom: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.detalles-livro img {
-  max-width: 200px;
-  border-radius: 5px;
-}
-
-.informacoes-livro {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.informacoes-livro .informacoes {
-  margin-left: 20px;
-}
-
-.informacoes p {
-  font-size: 16px;
-  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .botoes button {
-  padding: 20px 30px;
+  padding: 10px 15px;
+  margin: 5px;
   background-color: #045A5B;
   color: white;
   border: none;
-  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin:10px;
 }
 
 .botoes button:hover {
-  background-color:  #487f80;
+  background-color: #034d4f;
 }
-
-.avaliacoes .comentario {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-.novo-comentario {
-  margin-top: 20px;
-}
-
-.novo-comentario textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.novo-comentario button {
-  padding: 10px 15px;
-  background-color:  #045A5B;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.novo-comentario button:hover {
-  background-color:  #487f80;
-}
-
-@media (max-width: 768px) {
-  .informacoes-livro {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .informacoes-livro img {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .botoes button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .detalles-livro h2 {
-    font-size: 24px;
-  }
-}
-
 </style>

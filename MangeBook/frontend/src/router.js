@@ -37,7 +37,7 @@ const routes = [
     component: RegistrarLivro,
   },
   {
-    path: '/MenuInicial',
+    path: '/',
     name: 'MenuInicial',
     component: MenuInicial,
   },
@@ -47,10 +47,9 @@ const routes = [
     component: BookList,  // O componente BookList será carregado aqui
   },
   {
-    path: '/',  // Adicionando rota com parâmetro de categoria
+    path: '/Catalago',  // Adicionando rota com parâmetro de categoria
     name: 'Catalago',
     component: catalago,  // O componente Catalogo será carregado aqui
-    props: true, // Permite passar o parâmetro como uma prop
   },
 ];
 

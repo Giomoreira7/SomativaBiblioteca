@@ -7,8 +7,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="/home">Pagina Inicial</a></li>
-          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="/Home">Pagina Inicial</a></li>
         </ul>
       </nav>
       <div class="search-bar">
@@ -17,140 +16,116 @@
       </div>
     </header>
 
-    <div class="catalog-body">
-      <!-- Exibição das categorias uma abaixo da outra -->
-      <div class="category-list">
-        <div v-for="(category, index) in filteredCategories" :key="index" class="category-container">
-          <h3>{{ category.name }}</h3>
-          <div class="book-list">
-            <div v-for="book in category.books" :key="book.id" class="book-card">
-              <img :src="`/path/to/images/${book.cover}`" alt="Capa do livro" class="book-cover" />
-              <div class="book-info">
-                <h4>{{ book.title }}</h4>
-                <p>{{ book.author }}</p>
-                <p>Disponibilidade: {{ book.available ? 'Disponível' : 'Indisponível' }}</p>
-              </div>
+    <!-- Livros por Categorias -->
+    <section class="livros">
+      <div class="categoria" v-for="(categoria, index) in categoriasLivros" :key="index">
+        <h2>{{ categoria.nome }}</h2>
+        <div class="livros-grid">
+          <div v-for="(livro, index) in categoria.livros" :key="index" class="livro">
+            <img :src="livro.imagem" :alt="livro.titulo" />
+            <div class="descricao">
+              <div class="avaliacao">{{ livro.avaliacao }}</div>
+              <div class="titulo">{{ livro.titulo }}</div>
+              <div class="autor">Autor: {{ livro.autor }}</div>
+              <div class="disponibilidade">Disponível: {{ livro.disponibilidade }}</div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Botão para se cadastrar p/ + -->
+    <div class="container-cadastre">
+      <router-link to="/register" class="btn-cadastre-mais">Se cadastre para mais</router-link>
     </div>
+
+    <!-- Rodapé -->
+    <footer>
+      <div class="footer-esquerda">
+        <p>Português (Brasil)</p>
+      </div>
+      <div class="footer-centro">
+        <p>© 2024 Todos os direitos reservados, Mange Library ®</p>
+      </div>
+      <div class="footer-direita">
+        <a href="https://www.facebook.com/SENAI.R.Mange/?locale=pt_BR" target="_blank">
+          <img src="../components/images/Capa2.jpg" alt="Facebook" />
+        </a>
+        <a href="https://www.linkedin.com/school/escola-senai-roberto-mange/posts/?feedView=all" target="_blank">
+          <img src="../components/images/Capa2.jpg" alt="LinkedIn" />
+        </a>
+        <a href="https://www.youtube.com/@senaisaopaulo-senairoberto8729" target="_blank">
+          <img src="../components/images/Capa2.jpg" alt="YouTube" />
+        </a>
+        <a href="https://www.instagram.com/senaimange/" target="_blank">
+          <img src="../components/images/Capa2.jpg" alt="Instagram" />
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
+
 
 <script>
 export default {
   data() {
     return {
       searchQuery: '',
-      categories: [
-        {
-          name: 'Ficção',
-          books: [
-            {
-              id: 1,
-              cover: 'capa1.jpg',
-              title: 'Livro 1',
-              author: 'Autor 1',
-              available: true,
-              genre: 'Ficção',
-              publishedDate: '2020-01-01'
-            },
-            {
-              id: 2,
-              cover: 'capa2.jpg',
-              title: 'O Senhor dos Anéis',
-              author: 'J.R.R. Tolkien',
-              available: false,
-              genre: 'Ficção',
-              publishedDate: '2021-05-15'
-            }
-          ]
-        },
-        {
-          name: 'Mistério',
-          books: [
-            {
-              id: 3,
-              cover: 'capa3.jpg',
-              title: 'Sherlock Holmes',
-              author: 'Arthur Conan Doyle',
-              available: true,
-              genre: 'Mistério',
-              publishedDate: '1892-10-14'
-            }
-          ]
-        },
-        {
-          name: 'Romance',
-          books: [
-            {
-              id: 4,
-              cover: 'capa4.jpg',
-              title: 'Orgulho e Preconceito',
-              author: 'Jane Austen',
-              available: true,
-              genre: 'Romance',
-              publishedDate: '1813-01-28'
-            }
-          ]
-        },
-        {
-          name: 'Ciência',
-          books: [
-            {
-              id: 5,
-              cover: 'capa5.jpg',
-              title: 'A Origem das Espécies',
-              author: 'Charles Darwin',
-              available: false,
-              genre: 'Ciência',
-              publishedDate: '1859-11-24'
-            }
-          ]
-        },
-        {
-          name: 'História',
-          books: [
-            {
-              id: 6,
-              cover: 'capa6.jpg',
-              title: 'A História da Segunda Guerra Mundial',
-              author: 'Winston Churchill',
-              available: true,
-              genre: 'História',
-              publishedDate: '1948-11-01'
-            }
-          ]
-        }
+      livros: [
+        { imagem: require('../components/images/Livro11.jpg'), avaliacao: "★★★★☆", titulo: "Em rota de colisão", autor: "Bal Khabra ", categoria: "Romance", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro6.jpg'), avaliacao: "★★★★★", titulo: "O túmulo veloz", autor: "Robert Galbraith", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro7.jpg'), avaliacao: "★★★★★", titulo: "Depois daquela noite", autor: " Karin Slaughter", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro8.jpg'), avaliacao: "★★★★★", titulo: "A sociedade oculta de Londres ", autor: " Sarah Penner", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro9.jpg'), avaliacao: "★★★★★", titulo: "O crime do bom nazista", autor: "Samir Machado de Machado ", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro10.jpg'), avaliacao: "★★★★★", titulo: "O preço da vitória", autor: "Harlan Coben", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Me Poupe! (Edição atualizada)", autor: "Nathalia Arcuri", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro1.jpg'), avaliacao: "★★★★★", titulo: "O Hobbit + pôster", autor: "J.R.R. Tolkien", categoria: "Ficção", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro2.jpg'), avaliacao: "★★★★★", titulo: "Tudo é rio ", autor: " Carla Madeira", categoria: "Ficção", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "O Homem Mais Rico da Babilônia", autor: "George S. Clason", categoria: "História", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "O Poder do Hábito", autor: "Charles Duhigg", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Mindset", autor: "Carol S. Dweck", categoria: "Ciência", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★★", titulo: "A Psicologia Financeira", autor: "Morgan Housel", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro12.jpg'), avaliacao: "★★☆☆☆", titulo: "O morro dos ventos uivantes", autor: " Emily Brontë ", categoria: "Romance", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "É Assim que Acaba", autor: "Jonathan Haidt", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro13.jpg'), avaliacao: "★★★★☆", titulo: "É Assim que Acaba", autor: "Colleen Hoover", categoria: "Romance", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro14.jpg'), avaliacao: "★★★★☆", titulo: "Vergonha", autor: " Brittainy Cherry", categoria: "Romance", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro15.jpg'), avaliacao: "★★★★☆", titulo: "Imperfeitos", autor: " Christina Lauren", categoria: "Romance", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Princípios milenares", autor: "Tiago Brunet", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro3.jpg'), avaliacao: "★★★★☆", titulo: "A empregada", autor: " Freida McFadden ", categoria: "Ficção", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro4.jpg'), avaliacao: "★★★★★", titulo: "A Biblioteca da Meia-Noite", autor: " Matt Haig ", categoria: "Ficção", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Introdução à Programação", autor: "Nilo Ney", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★☆☆", titulo: "Desinformação", autor: "Dan Ariely", categoria: "Ciência", disponibilidade: "Não" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★★", titulo: "A guerra dos chips", autor: "Chris Miller", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★☆☆☆", titulo: "Arquitetura de Software", autor: "Neal Ford", categoria: "Ciência", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: " Stephanie Garber ", categoria: "Ficção", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★☆☆", titulo: "Engenharia de Software Moderna", autor: "Marco Tulio", categoria: "Ciência", disponibilidade: "Não" }
       ]
     };
   },
   computed: {
-    // Filtra as categorias de acordo com o parâmetro da URL
-    filteredCategories() {
-      const categoryParam = this.$route.params.category;
-      if (categoryParam) {
-        // Retorna a categoria correspondente ao parâmetro da URL
-        return this.categories.filter(category => category.name.toLowerCase() === categoryParam.toLowerCase());
-      }
-      return this.categories; // Se não houver parâmetro, mostra todas as categorias
+    categoriasLivros() {
+      // Agrupando livros por categorias: Ficção, Mistério, Romance, Ciência, História
+      const categorias = [
+        { nome: "Ficção", livros: this.livros.filter(livro => livro.categoria === 'Ficção') },
+        { nome: "Mistério", livros: this.livros.filter(livro => livro.categoria === 'Mistério') },
+        { nome: "Romance", livros: this.livros.filter(livro => livro.categoria === 'Romance') },
+        { nome: "Ciência", livros: this.livros.filter(livro => livro.categoria === 'Ciência') },
+        { nome: "História", livros: this.livros.filter(livro => livro.categoria === 'História') }
+      ];
+      return categorias;
     }
   },
   methods: {
     searchBooks() {
-      // Lógica para buscar livros, caso seja necessário implementar
-      console.log('Pesquisando por:', this.searchQuery);
+      alert('Você pesquisou: ' + this.searchQuery);
+      // Aqui você pode adicionar a lógica de pesquisa
     }
   }
 };
 </script>
 
 <style scoped>
-.catalog-container {
-  padding: 20px;
-}
-
+/* Estilo do Cabeçalho */
 header {
   display: flex;
   justify-content: space-between;
@@ -197,98 +172,131 @@ header .search-bar input {
   margin-right: 10px;
   border: none;
   border-radius: 4px;
-  width: 400px; /* Largura do campo de pesquisa */
-  font-size: 16px; /* Tamanho da fonte do campo de pesquisa */
+  width: 400px;
 }
 
 header .search-bar button {
-  padding: 15px 40px; /* Tamanho do botão */
+  padding: 15px;
   background-color: #045A5B;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 header .search-bar button:hover {
-  background-color: #1a9496; /* Cor de fundo do botão ao passar o mouse */
+  background-color: #27ae60;
 }
 
-/* Seções */
-section {
-  padding: 40px; /* Padding para as seções */
-  text-align: left;
+/* Estilo da seção de livros */
+/* Estilo da seção de livros */
+.livros {
+  margin: 50px 20px;
 }
 
-.catalog-body {
-  margin-top: 30px;
-}
-
-.filters {
+.categoria {
   margin-bottom: 30px;
-  font-size: 16px;
 }
 
-.filters label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.filters input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
+.categoria h2 {
+  font-size: 24px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  color: #045A5B;
 }
 
-.category-list {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.category-container {
-  border: 1px solid #045a5b;
-  padding: 20px;
-}
-
-.book-list {
-  display: flex;
-  flex-wrap: wrap;
+.livros-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas */
   gap: 20px;
+  justify-items: center; /* Centraliza os itens */
 }
 
-.book-card {
-  width: 150px;
-  border: 1px solid #045a5b;
-  padding: 10px;
+.livro {
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
   text-align: center;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  transition: transform 0.3s ease;
 }
 
-.book-cover {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 15px;
+.livro:hover {
+  transform: translateY(-10px); /* Efeito de mover para frente */
 }
 
-button {
-  padding: 8px 16px;
-  margin-top: 10px;
-  background-color: #045a5b;
-  color: white;
-  border: none;
+.livro img {
+  max-width: 100%;
+  height: auto;
   border-radius: 5px;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: #023d3d;
+.descricao {
+  padding: 10px;
+}
+
+.avaliacao {
+  font-size: 14px;
+  color: #999;
+}
+
+.titulo {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.autor, .disponibilidade {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Estilo do botão de cadastro */
+.container-cadastre {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-cadastre-mais {
+  padding: 15px 30px;
+  background-color: #045A5B;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-cadastre-mais:hover {
+  background-color: #27ae60;
+}
+
+/* Estilo do Rodapé */
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer .footer-esquerda, footer .footer-centro, footer .footer-direita {
+  display: flex;
+  align-items: center;
+}
+
+footer .footer-centro {
+  font-size: 14px;
+  color: #fff;
+}
+
+footer .footer-direita a {
+  margin-left: 15px;
+}
+
+footer .footer-direita img {
+  width: 30px;
+  height: 30px;
 }
 </style>
