@@ -235,7 +235,7 @@ export default {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color:  #045A5B;
+  background-color: #045A5B;
   padding: 0;
 }
 
@@ -254,7 +254,7 @@ header .logo img {
 
 header h1 {
   font-size: 24px;
-  color:  #045A5B;
+  color: #045A5B;
 }
 
 nav ul {
@@ -263,7 +263,7 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: center;
-  background-color:  #045A5B;
+  background-color: #045A5B;
 }
 
 nav ul li {
@@ -284,13 +284,69 @@ main {
   margin: 20px;
 }
 
-.detalles-livro, .avaliacoes, .historico {
+.detalhes-livro, .avaliacoes, .historico, .formulario-livro {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Espaço entre seções */
 }
 
+/* Estilo do formulário */
+.formulario-livro form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px; /* Limita a largura do formulário */
+  margin: 0 auto; /* Centraliza o formulário na tela */
+}
+
+.formulario-livro div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.formulario-livro label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.formulario-livro input,
+.formulario-livro textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.formulario-livro input[type="number"] {
+  moz-appearance: textfield;
+}
+
+.formulario-livro button {
+  padding: 10px 15px;
+  background-color: #045A5B;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.formulario-livro button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.formulario-livro button:hover {
+  background-color: #034d4f;
+}
+
+/* Estilo dos botões na seção detalhes do livro */
 .botoes button {
   padding: 10px 15px;
   margin: 5px;
@@ -303,4 +359,29 @@ main {
 .botoes button:hover {
   background-color: #034d4f;
 }
+
+/* Estilo da área de comentários */
+.avaliacoes .novo-comentario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  min-height: 80px;
+}
+
+.avaliacoes .novo-comentario button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  background-color: #045A5B;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.avaliacoes .novo-comentario button:hover {
+  background-color: #034d4f;
+}
+
 </style>
