@@ -7,7 +7,6 @@ import RegistrarLivro from './components/RegistrarLivro.vue';
 import Home from './views/Home.vue';
 import Dashboard from '../src/views/Dashboard.vue';
 import MenuInicial from '../src/views/MenuIncial.vue';
-import BookList from './components/BookList.vue'; // Adicionando a importação do BookList
 import catalago from './components/catalago.vue';
 
 const routes = [
@@ -32,19 +31,14 @@ const routes = [
     component: Registrar,
   },
   {
-    path: '/RegistrarLivro',
+    path: '/',
     name: 'RegistrarLivro',
     component: RegistrarLivro,
   },
   {
-    path: '/',
+    path: '/MenuInicial',
     name: 'MenuInicial',
     component: MenuInicial,
-  },
-  {
-    path: '/book-list',  // Caminho para acessar a lista de livros
-    name: 'BookList',
-    component: BookList,  // O componente BookList será carregado aqui
   },
   {
     path: '/Catalago',  // Adicionando rota com parâmetro de categoria

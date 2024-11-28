@@ -1,4 +1,4 @@
-const Book = require('../models/bookModel');
+
 const User = require('../models/userModel');
 
 // Função que retorna os dados reais do dashboard

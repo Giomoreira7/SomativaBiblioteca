@@ -3,108 +3,28 @@ const express = require('express');
 const Livro = require('../models/livro');
 const router = express.Router();
 
-// Adicionar um novo livro
+// Rota para cadastrar um livro
 router.post('/', async (req, res) => {
+  const { titulo, autor, descricao, anoPublicacao, genero, isbn, numeroCopias, capa } = req.body;
+
   try {
-    const livro = new Livro(req.body);
+    const livro = new Livro({ titulo, autor, descricao, anoPublicacao, genero, isbn, numeroCopias, capa });
     await livro.save();
     res.status(201).json(livro);
-  } catch (error) {
-    res.status(400).json({ mensagem: 'Erro ao adicionar livro', erro: error.message });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao cadastrar livro', erro: err.message });
   }
 });
 
-// Obter todos os livros
+// Rota para listar todos os livros
 router.get('/', async (req, res) => {
   try {
     const livros = await Livro.find();
     res.status(200).json(livros);
-  } catch (error) {
-    res.status(500).json({ mensagem: 'Erro ao listar livros', erro: error.message });
-  }
-});
-
-// Obter um livro específico
-router.get('/:id', async (req, res) => {
-  try {
-    const livro = await Livro.findById(req.params.id);
-    if (!livro) {
-      return res.status(404).json({ mensagem: 'Livro não encontrado' });
-    }
-    res.status(200).json(livro);
-  } catch (error) {
-    res.status(500).json({ mensagem: 'Erro ao obter livro', erro: error.message });
-  }
-});
-
-// Editar um livro
-router.put('/:id', async (req, res) => {
-  try {
-    const livro = await Livro.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!livro) {
-      return res.status(404).json({ mensagem: 'Livro não encontrado' });
-    }
-    res.status(200).json(livro);
-  } catch (error) {
-    res.status(400).json({ mensagem: 'Erro ao editar livro', erro: error.message });
-  }
-});
-
-// Deletar um livro
-router.delete('/:id', async (req, res) => {
-  try {
-    const livro = await Livro.findByIdAndDelete(req.params.id);
-    if (!livro) {
-      return res.status(404).json({ mensagem: 'Livro não encontrado' });
-    }
-    res.status(200).json({ mensagem: 'Livro excluído com sucesso' });
-  } catch (error) {
-    res.status(400).json({ mensagem: 'Erro ao excluir livro', erro: error.message });
-  }
-});
-
-// Reservar livro
-router.post('/reservar', async (req, res) => {
-  const { livroId } = req.body;
-  try {
-    const livro = await Livro.findById(livroId);
-    if (!livro) {
-      return res.status(404).json({ mensagem: 'Livro não encontrado' });
-    }
-    // Lógica para reservar o livro
-    res.status(200).json({ mensagem: 'Livro reservado com sucesso' });
-  } catch (error) {
-    res.status(400).json({ mensagem: 'Erro ao reservar livro', erro: error.message });
-  }
-});
-
-// Emprestar livro
-router.post('/emprestar', async (req, res) => {
-  const { livroId } = req.body;
-  try {
-    const livro = await Livro.findById(livroId);
-    if (!livro) {
-      return res.status(404).json({ mensagem: 'Livro não encontrado' });
-    }
-    // Lógica para emprestar o livro
-    res.status(200).json({ mensagem: 'Livro emprestado com sucesso' });
-  } catch (error) {
-    res.status(400).json({ mensagem: 'Erro ao emprestar livro', erro: error.message });
-  }
-});
-
-// Adicionar comentário ao livro
-router.post('/:id/comentarios', async (req, res) => {
-  try {
-    const livro = await Livro.findById(req.params.id);
-    if (!livro) {
-      return res.status(404).json({ mensagem: 'Livro não encontrado' });
-    }
-    livro.comentarios.push(req.body);
-    await livro.save();
-    res.status(201).json(livro.comentarios);
-  } catch (error) {
-    res.status(400).json({ mensagem: 'Erro ao adicionar comentário', erro: error.message });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao obter livros', erro: err.message });
   }
 });
 

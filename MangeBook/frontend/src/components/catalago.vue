@@ -65,7 +65,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   data() {
@@ -78,225 +77,144 @@ export default {
         { imagem: require('../components/images/Livro8.jpg'), avaliacao: "★★★★★", titulo: "A sociedade oculta de Londres ", autor: " Sarah Penner", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro9.jpg'), avaliacao: "★★★★★", titulo: "O crime do bom nazista", autor: "Samir Machado de Machado ", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro10.jpg'), avaliacao: "★★★★★", titulo: "O preço da vitória", autor: "Harlan Coben", categoria: "Mistério", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Me Poupe! (Edição atualizada)", autor: "Nathalia Arcuri", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro16.jpg'), avaliacao: "★★★★☆", titulo: "Outlive: A arte e a ciência de viver mais e melhor", autor: "Peter Attia", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro1.jpg'), avaliacao: "★★★★★", titulo: "O Hobbit + pôster", autor: "J.R.R. Tolkien", categoria: "Ficção", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro2.jpg'), avaliacao: "★★★★★", titulo: "Tudo é rio ", autor: " Carla Madeira", categoria: "Ficção", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "O Homem Mais Rico da Babilônia", autor: "George S. Clason", categoria: "História", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "O Poder do Hábito", autor: "Charles Duhigg", categoria: "Ciência", disponibilidade: "Sim" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Mindset", autor: "Carol S. Dweck", categoria: "Ciência", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★★", titulo: "A Psicologia Financeira", autor: "Morgan Housel", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro21.jpg'), avaliacao: "★★★★☆", titulo: "1499 : O Brasil antes de Cabral", autor: " Reinaldo José Lopes", categoria: "História", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro17.jpg'), avaliacao: "★★★★☆", titulo: "Apaixone-se pelo problema, não pela solução ", autor: "Uri Levine", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro18.jpg'), avaliacao: "★★★★☆", titulo: "Uma breve história do tempo", autor: " Stephen Hawking", categoria: "Ciência", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro19.jpg'), avaliacao: "★★★★★", titulo: "Darwin sem frescura", autor: "Reinaldo José Lopes", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro12.jpg'), avaliacao: "★★☆☆☆", titulo: "O morro dos ventos uivantes", autor: " Emily Brontë ", categoria: "Romance", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "É Assim que Acaba", autor: "Jonathan Haidt", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro20.jpg'), avaliacao: "★★★★☆", titulo: "Os mistérios do Universo", autor: "Will Gater", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro13.jpg'), avaliacao: "★★★★☆", titulo: "É Assim que Acaba", autor: "Colleen Hoover", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro14.jpg'), avaliacao: "★★★★☆", titulo: "Vergonha", autor: " Brittainy Cherry", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro15.jpg'), avaliacao: "★★★★☆", titulo: "Imperfeitos", autor: " Christina Lauren", categoria: "Romance", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Princípios milenares", autor: "Tiago Brunet", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro22.jpg'), avaliacao: "★★★★☆", titulo: "Sobreviventes e guerreiras: Uma breve história da mulher no brasil de 1500 a 2000", autor: " Mary del Priore ", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro3.jpg'), avaliacao: "★★★★☆", titulo: "A empregada", autor: " Freida McFadden ", categoria: "Ficção", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro4.jpg'), avaliacao: "★★★★★", titulo: "A Biblioteca da Meia-Noite", autor: " Matt Haig ", categoria: "Ficção", disponibilidade: "Sim" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★☆", titulo: "Introdução à Programação", autor: "Nilo Ney", categoria: "Ciência", disponibilidade: "Sim" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★☆☆", titulo: "Desinformação", autor: "Dan Ariely", categoria: "Ciência", disponibilidade: "Não" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★★★", titulo: "A guerra dos chips", autor: "Chris Miller", categoria: "História", disponibilidade: "Sim" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★☆☆☆", titulo: "Arquitetura de Software", autor: "Neal Ford", categoria: "Ciência", disponibilidade: "Não" },
-        { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: " Stephanie Garber ", categoria: "Ficção", disponibilidade: "Sim" },
-        { imagem: require('../components/images/Capa2.jpg'), avaliacao: "★★★☆☆", titulo: "Engenharia de Software Moderna", autor: "Marco Tulio", categoria: "Ciência", disponibilidade: "Não" }
-      ]
+        { imagem: require('../components/images/Livro23.jpg'), avaliacao: "★★★★★", titulo: "O perigo de uma história única", autor: " Chimamanda Ngozi Adichie ", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro24.jpg'), avaliacao: "★★★★★", titulo: "O queijo e os vermes", autor: " Carlo Ginzburg", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro25.jpg'), avaliacao: "★★★★★", titulo: "Israel x Palestina: 100 Anos de Guerra", autor: " James L. Gelvin", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: " Stephanie Garber ", categoria: "Romance", disponibilidade: "Não" }
+      ],
+      filteredLivros: []
     };
   },
   computed: {
     categoriasLivros() {
-      // Agrupando livros por categorias: Ficção, Mistério, Romance, Ciência, História
-      const categorias = [
-        { nome: "Ficção", livros: this.livros.filter(livro => livro.categoria === 'Ficção') },
-        { nome: "Mistério", livros: this.livros.filter(livro => livro.categoria === 'Mistério') },
-        { nome: "Romance", livros: this.livros.filter(livro => livro.categoria === 'Romance') },
-        { nome: "Ciência", livros: this.livros.filter(livro => livro.categoria === 'Ciência') },
-        { nome: "História", livros: this.livros.filter(livro => livro.categoria === 'História') }
-      ];
-      return categorias;
+      const categories = ['Ficção', 'Mistério', 'Romance', 'Ciência', 'História'];
+      return categories.map(category => ({
+        nome: category,
+        livros: this.filteredLivros.filter(livro => livro.categoria === category)
+      }));
     }
   },
   methods: {
     searchBooks() {
-      alert('Você pesquisou: ' + this.searchQuery);
-      // Aqui você pode adicionar a lógica de pesquisa
+      if (!this.searchQuery) {
+        this.filteredLivros = this.livros;
+      } else {
+        const query = this.searchQuery.toLowerCase();
+        this.filteredLivros = this.livros.filter(livro => 
+          livro.titulo.toLowerCase().includes(query) || livro.autor.toLowerCase().includes(query)
+        );
+      }
     }
+  },
+  mounted() {
+    this.filteredLivros = this.livros; // Inicializa com todos os livros
   }
 };
 </script>
 
 <style scoped>
-/* Estilo do Cabeçalho */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-}
-
-header .logo img {
-  height: 70px;
-}
-
-header nav ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-header nav ul li {
-  margin-left: 20px; /* Espaço entre os itens */
-}
-
-header nav ul li a {
-  color: #045A5B;
-  text-decoration: none;
-  font-size: 22px;
-  padding: 10px;
-  transition: color 0.3s;
-}
-
-header nav ul li a:hover {
-  color: #27ae60; /* Cor de hover para o link */
-}
-
-header .search-bar {
-  display: flex;
-  align-items: center; /* Alinha o campo de pesquisa verticalmente ao centro */
-}
-
-header .search-bar input {
-  padding: 15px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 4px;
-  width: 400px;
-}
-
-header .search-bar button {
-  padding: 15px;
-  background-color: #045A5B;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-header .search-bar button:hover {
-  background-color: #27ae60;
-}
-
-/* Estilo da seção de livros */
-/* Estilo da seção de livros */
-.livros {
-  margin: 50px 20px;
-}
-
-.categoria {
-  margin-bottom: 30px;
-}
-
-.categoria h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #045A5B;
-}
-
+/* Estilos do componente */
 .livros-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  justify-items: center; /* Centraliza os itens */
+  margin-top: 20px;
 }
 
 .livro {
-  background-color: white;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
   text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.livro:hover {
-  transform: translateY(-10px); /* Efeito de mover para frente */
 }
 
 .livro img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   border-radius: 5px;
 }
 
-.descricao {
-  padding: 10px;
+.livro .descricao {
+  margin-top: 10px;
 }
 
-.avaliacao {
-  font-size: 14px;
-  color: #999;
+.livro .avaliacao {
+  font-size: 1.2em;
+  color: #f39c12;
 }
 
-.titulo {
+.livro .titulo {
+  font-size: 1.1em;
   font-weight: bold;
-  margin: 10px 0;
 }
 
-.autor, .disponibilidade {
-  font-size: 14px;
-  color: #555;
+.livro .autor {
+  font-size: 1em;
 }
 
-/* Estilo do botão de cadastro */
-.container-cadastre {
-  text-align: center;
-  margin-top: 20px;
+.livro .disponibilidade {
+  font-size: 1em;
+  color: #27ae60;
 }
 
-.btn-cadastre-mais {
-  padding: 15px 30px;
-  background-color: #045A5B;
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+/* Estilos do cabeçalho e pesquisa */
+.search-bar {
+  margin: 20px;
 }
 
-.btn-cadastre-mais:hover {
+.search-bar input {
+  padding: 10px;
+  font-size: 1em;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  font-size: 1em;
   background-color: #27ae60;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-/* Estilo do Rodapé */
+.search-bar button:hover {
+  background-color: #2ecc71;
+}
+
+/* Rodapé */
 footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  background-color: #333;
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-footer .footer-esquerda, footer .footer-centro, footer .footer-direita {
-  display: flex;
   align-items: center;
 }
 
+footer a img {
+  width: 30px;
+  margin: 0 10px;
+}
+
 footer .footer-centro {
-  font-size: 14px;
-  color: #fff;
+  text-align: center;
 }
 
 footer .footer-direita a {
-  margin-left: 15px;
-}
-
-footer .footer-direita img {
-  width: 30px;
-  height: 30px;
+  margin-right: 20px;
 }
 </style>
