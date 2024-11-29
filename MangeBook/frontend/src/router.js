@@ -7,7 +7,7 @@ import RegistrarLivro from './components/RegistrarLivro.vue';
 import Home from './views/Home.vue';
 import Dashboard from '../src/views/Dashboard.vue';
 import MenuInicial from '../src/views/MenuIncial.vue';
-import catalago from './components/catalago.vue';
+import catalago from '../src/components/catalago.vue';
 
 const routes = [
   {
@@ -16,7 +16,7 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: '/Home',
+    path: '/',
     name: 'Home',
     component: Home,
   },
@@ -31,7 +31,7 @@ const routes = [
     component: Registrar,
   },
   {
-    path: '/',
+    path: '/RegistrarLivro',
     name: 'RegistrarLivro',
     component: RegistrarLivro,
   },

@@ -45,7 +45,7 @@
       <h2 class="categorias-titulo">Categorias</h2>
       <div class="categorias-botoes">
         <!-- Botões para todas as categorias, agora redirecionando para a página Catalogo -->
-        <router-link to="/" class="categoria">Ficção</router-link>
+        <router-link to="/catalogo" class="categoria">Ficção</router-link>
         <router-link to="/catalogo" class="categoria">Mistério</router-link>
         <router-link to="/catalogo" class="categoria">Romance</router-link>
         <router-link to="/catalogo" class="categoria">Ciência</router-link>
