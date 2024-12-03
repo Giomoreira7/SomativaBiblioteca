@@ -8,7 +8,7 @@
         </div>
         <nav>
           <ul>
-            <li><a href="/Home">Pagina Inicial</a></li>
+            <li><a href="/">Pagina Inicial</a></li>
           </ul>
         </nav>
       </header>
@@ -30,7 +30,7 @@
         this.$router.push({ name: 'Dashboard' }); // Redireciona para a página Dashboard
       },
       goToRegistrarLivro() {
-        this.$router.push({ name: 'RegistrarLivro' }); // Redireciona para a página Registrar Livro
+        this.$router.push('/RegistarLivro'); // Redireciona para a página Registrar Livro
       },
       goToBookList(){
         this.$router.push({ name: 'BookList' });

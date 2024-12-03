@@ -1,167 +1,71 @@
 <template>
   <div class="fundo">
-    <div class="cadastro-container">
-      <div class="cadastro-header">
-        <h1>Cadastrar-se na Biblioteca</h1>
-        <p>Preencha os campos abaixo para criar sua conta.</p>
+    <div class="register-container">
+      <div class="register-header">
+        <h1>Registrar</h1>
       </div>
-
-      <form class="cadastro-form" @submit.prevent="handleSubmit">
-        <label for="nome">Nome Completo *</label>
-        <input
-          type="text"
-          id="nome"
-          v-model="form.nome"
-          placeholder="Digite seu nome completo"
-          required
+      
+      <form @submit.prevent="submitRegister">
+        <input 
+          type="text" 
+          v-model="name" 
+          placeholder="Nome" 
+          required 
         />
-
-        <label for="email">Email *</label>
-        <input
-          type="email"
-          id="email"
-          v-model="form.email"
-          placeholder="Digite seu email"
-          required
+        <input 
+          type="email" 
+          v-model="email" 
+          placeholder="Email" 
+          required 
         />
-
-        <label for="cpf">CPF *</label>
-        <input
-          type="text"
-          id="cpf"
-          v-model="form.cpf"
-          placeholder="000.000.000-00"
-          required
+        <input 
+          type="password" 
+          v-model="password" 
+          placeholder="Senha" 
+          required 
         />
-
-        <label>Você é:</label>
-        <div class="radio-group">
-          <input
-            type="radio"
-            id="aluno"
-            name="tipo"
-            value="Aluno"
-            v-model="form.tipo"
-            required
-          />
-          <label for="aluno">Aluno</label>
-
-          <input
-            type="radio"
-            id="funcionario"
-            name="tipo"
-            value="Funcionário"
-            v-model="form.tipo"
-            required
-          />
-          <label for="funcionario">Funcionário</label>
-        </div>
-
-        <!-- Campo dinâmico para RM ou NIF -->
-        <div v-if="form.tipo" id="campo-identificacao">
-          <label for="identificacao" id="label-identificacao"></label>
-          <input
-            type="text"
-            id="identificacao"
-            v-model="form.identificacao"
-            :placeholder="placeholderIdentificacao"
-            required
-          />
-        </div>
-
-        <label for="senha">Senha *</label>
-        <input
-          type="password"
-          id="senha"
-          v-model="form.senha"
-          placeholder="Crie uma senha"
-          required
-        />
-
-        <label for="confirma-senha">Confirme a Senha *</label>
-        <input
-          type="password"
-          id="confirma-senha"
-          v-model="form.confirmaSenha"
-          placeholder="Confirme sua senha"
-          required
-        />
-
-        <button type="submit">Cadastrar</button>
+        <select v-model="role" required>
+          <option value="Aluno">Aluno</option>
+          <option value="Funcionario">Funcionário</option>
+        </select>
+        <button type="submit">Registrar</button>
       </form>
-
-      <div class="cadastro-footer">
-        <p>Já possui uma conta? <a href="/login" class="link-login">Faça login</a></p>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
-      form: {
-        nome: '',
-        email: '',
-        cpf: '',
-        tipo: '', // 'Aluno' ou 'Funcionário'
-        identificacao: '', // RM ou NIF
-        senha: '',
-        confirmaSenha: ''
-      }
+      name: '',
+      email: '',
+      password: '',
+      role: 'Aluno'
     };
   },
-  computed: {
-    // Definir o texto do placeholder para o campo de identificação dinamicamente
-    placeholderIdentificacao() {
-      return this.form.tipo === 'Aluno'
-        ? 'Digite seu RM (Registro de Matrícula)'
-        : this.form.tipo === 'Funcionário'
-        ? 'Digite seu NIF (Número de Identificação)'
-        : '';
-    }
-  },
   methods: {
-    handleSubmit() {
-      // Verificar se as senhas coincidem
-      if (this.form.senha !== this.form.confirmaSenha) {
-        alert('As senhas não coincidem! Verifique e tente novamente.');
-        return;
-      }
-
-      // Validação de CPF - (Exemplo simples de validação, adicione uma validação mais robusta conforme necessário)
-      if (!this.isValidCPF(this.form.cpf)) {
-        alert('CPF inválido! Verifique e tente novamente.');
-        return;
-      }
-
-      // Aqui você pode enviar os dados para a API (exemplo de envio usando axios)
-      console.log('Dados do cadastro:', this.form);
-      // this.$axios.post('/api/cadastrar', this.form);
-
-      // Limpar o formulário após o envio
-      this.form = {
-        nome: '',
-        email: '',
-        cpf: '',
-        tipo: '',
-        identificacao: '',
-        senha: '',
-        confirmaSenha: ''
+    submitRegister() {
+      const registerData = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        role: this.role
       };
-      alert('Cadastro realizado com sucesso!');
-    },
 
-    isValidCPF(cpf) {
-      // Função de validação de CPF simples
-      // Uma validação de CPF mais robusta deve ser feita aqui
-      return cpf.length === 14 && /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/.test(cpf);
+      axios.post('http://localhost:5000/api/register', registerData)
+        .then(response => {
+          console.log('Usuário registrado:', response);
+          this.$router.push('/login'); // Redireciona para a página de login
+        })
+        .catch(error => {
+          console.error('Erro ao registrar:', error);
+        });
     }
   }
 };
 </script>
-
 <style scoped>
 * {
   box-sizing: border-box;
@@ -328,6 +232,3 @@ button:hover {
   }
 }
 </style>
-
- 
-

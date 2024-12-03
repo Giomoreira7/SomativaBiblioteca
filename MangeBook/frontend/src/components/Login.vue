@@ -1,67 +1,73 @@
 <template>
   <div class="fundo">
-  <div class="login-container">
-    <div class="login-header">
-      <h1>Iniciar Sessão</h1>
-    </div>
-    <form class="login-form" @submit.prevent="login">
-      <label for="email">Email *</label>
-      <input type="email" id="email" v-model="email" required>
+    <div class="login-container">
+      <div class="login-header">
+        <h1>Login</h1>
+      </div>
+      
+      <form @submit.prevent="submitLogin">
+        <input 
+          type="email" 
+          v-model="email" 
+          placeholder="Email" 
+          required 
+        />
+        <input 
+          type="password" 
+          v-model="password" 
+          placeholder="Senha" 
+          required 
+        />
+        <button type="submit">Entrar</button>
+      </form>
 
-      <label for="senha">Senha *</label>
-      <input type="password" id="senha" v-model="senha" required>
-
-      <button type="submit">ENTRAR</button>
-    </form>
-    <div class="login-footer">
-      <span class="recuperar-senha">RECUPERAR SENHA</span>
       <div class="cadastrar-container">
-        <span>Não tem uma conta? </span>
-        <!-- Usando router-link para redirecionar para a página de registro -->
-        <router-link to="/Register" class="link-cadastrar">Cadastre-se</router-link>
+        <p class="recuperar-senha">Esqueci minha senha</p>
+        <p class="link-cadastrar">
+          Não tem uma conta? 
+          <router-link to="/register">Registre-se aqui</router-link>
+        </p>
       </div>
     </div>
   </div>
-</div> 
 </template>
 
 <script>
 import axios from 'axios';
-
 export default {
   data() {
     return {
       email: '',
-      senha: '',
-      errorMessage: '',
+      password: ''
     };
   },
   methods: {
-    async login() {
-      try {
-        const response = await axios.post('http://localhost:5000/api/login', {
-          email: this.email,
-          senha: this.senha,
+    submitLogin() {
+      const loginData = {
+        email: this.email,
+        password: this.password
+      };
+
+      axios.post('http://localhost:5000/api/login', loginData)
+        .then(response => {
+          // Armazenar o token JWT no localStorage
+          localStorage.setItem('token', response.data.token);
+          this.$router.push('/Menunicial'); // Redireciona para a página Menu
+        })
+        .catch(error => {
+          console.error('Erro no login:', error);
         });
-
-        console.log('Login bem-sucedido:', response.data);
-
-        alert('Login bem-sucedido!');
-      } catch (error) {
-        this.errorMessage = error.response?.data?.error || 'Erro ao fazer login';
-      }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
 * {
   box-sizing: border-box;
-  
 }
 
-.fundo{
+.fundo {
   height: 100vh;
   padding: 0;
   display: flex;
@@ -71,12 +77,10 @@ export default {
   background-size: cover;
 }
 
-
 html, body {
   height: 100%;
   padding: 0;
   font-size: 14px;
-
 }
 
 body {
@@ -87,7 +91,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 
 .login-container {
   width: 400px;
@@ -142,3 +145,4 @@ button:hover {
   margin-top: 20px;
 }
 </style>
+
