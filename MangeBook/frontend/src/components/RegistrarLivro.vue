@@ -1,39 +1,55 @@
 <template>
-  <div>
-    <h1>Book Management</h1>
+  <div class="app">
+    <!-- Cabeçalho -->
+    <header class="header">
+      <div class="logo">
+        <img src="../components/images/logo.png" alt="Logo da Biblioteca" />
+      </div>
+      <nav>
+        <ul>
+          <li><router-link to="/">Início</router-link></li>
+          <li><a href="/Login">Login</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="/Login">Administrador</a></li>
+        </ul>
+      </nav>
+      <div class="search-bar">
+        <input type="text" v-model="searchQuery" placeholder="Pesquise livros..." />
+        <button @click="searchBooks">Buscar</button>
+      </div>
+    </header>
 
     <!-- Adicionar livro -->
-    <div>
-      <h2>Add Book</h2>
+    <div class="form-container">
+      <h2>Adicionar Livros</h2>
       <input v-model="book.title" placeholder="Title" />
       <input v-model="book.author" placeholder="Author" />
       <input v-model="book.description" placeholder="Description" />
       <input type="file" @change="handleFileUpload" />
-      <button @click="addBook">Add</button>
+      <button @click="addBook">Adicionar</button>
     </div>
 
     <!-- Listar livros -->
-    <div>
-      <h2>Book List</h2>
+    <div class="list-container">
+      <h2>Lista de Livros Adicionados</h2>
       <ul>
         <li v-for="book in books" :key="book._id">
-          <!-- Exibindo a imagem -->
           <img v-if="book.image" :src="`http://localhost:5000${book.image}`" alt="Book Image" width="100" />
           <span>{{ book.title }} - {{ book.author }}</span>
-          <button @click="editBook(book)">Edit</button>
-          <button @click="removeBook(book._id)">Remove</button>
+          <button @click="editBook(book)">Editar</button>
+          <button @click="removeBook(book._id)">Remover</button>
         </li>
       </ul>
     </div>
 
     <!-- Editar livro -->
-    <div v-if="editingBook">
-      <h2>Edit Book</h2>
+    <div v-if="editingBook" class="form-container">
+      <h2>Editar Livro</h2>
       <input v-model="editingBook.title" placeholder="Title" />
       <input v-model="editingBook.author" placeholder="Author" />
       <input v-model="editingBook.description" placeholder="Description" />
       <input type="file" @change="handleFileUpload" />
-      <button @click="saveEdit">Save</button>
+      <button @click="saveEdit">Salvar</button>
     </div>
   </div>
 </template>
@@ -49,37 +65,33 @@ export default {
         title: '',
         author: '',
         description: '',
-        image: null, // Novo campo para armazenar a imagem
+        image: null,
       },
       editingBook: null,
+      searchQuery: '',
     };
   },
   mounted() {
     this.listBooks();
   },
   methods: {
-    // Método para listar todos os livros
     async listBooks() {
       try {
         const response = await axios.get('http://localhost:5000/books');
-        console.log(response.data); // Verifique aqui o que está retornando, especialmente o campo 'image'
         this.books = response.data;
       } catch (error) {
         console.error(error);
       }
     },
 
-    // Método para lidar com o upload de arquivos
     handleFileUpload(event) {
-      // Se estiver editando um livro, atualiza a imagem do livro em edição
       if (this.editingBook) {
         this.editingBook.image = event.target.files[0];
       } else {
-        this.book.image = event.target.files[0]; // Atualiza a imagem para o novo livro
+        this.book.image = event.target.files[0];
       }
     },
 
-    // Método para adicionar um novo livro
     async addBook() {
       const formData = new FormData();
       formData.append('title', this.book.title);
@@ -91,20 +103,17 @@ export default {
         const response = await axios.post('http://localhost:5000/books', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
-        console.log('Book added:', response.data); // Verifique a resposta, incluindo a URL da imagem
         this.listBooks();
-        this.book = { title: '', author: '', description: '', image: null }; // Limpa os campos
+        this.book = { title: '', author: '', description: '', image: null };
       } catch (error) {
         console.error(error);
       }
     },
 
-    // Método para editar um livro
     editBook(book) {
       this.editingBook = { ...book };
     },
 
-    // Método para salvar as edições de um livro
     async saveEdit() {
       const formData = new FormData();
       formData.append('title', this.editingBook.title);
@@ -123,11 +132,19 @@ export default {
       }
     },
 
-    // Método para remover um livro
     async removeBook(id) {
       try {
         await axios.delete(`http://localhost:5000/books/${id}`);
         this.listBooks();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async searchBooks() {
+      try {
+        const response = await axios.get(`http://localhost:5000/books/search?q=${this.searchQuery}`);
+        this.books = response.data;
       } catch (error) {
         console.error(error);
       }
@@ -137,42 +154,159 @@ export default {
 </script>
 
 <style scoped>
-/* Estilo para o frontend */
-button {
-  padding: 10px;
-  background-color: #045a5b;
+/* Estilo global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ff0000;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Cabeçalho */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  max-width: 100%;
+}
+
+.header .logo img {
+  width: 150px;
+  border-radius: 10px;
+}
+
+header nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+header nav ul li a {
+  color: #045a5b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Barra de pesquisa */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar input {
+  padding: 100px;
+  border-radius: 50px;
+  border: 1px solid #ff0000;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  background-color:  #045a5b;
   color: white;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 5px;
+}
+
+.search-bar button:hover {
+  background-color: #0bc4c7;
+}
+
+/* Formulário de Adicionar Livro */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Inputs e botões */
+input[type="text"], input[type="file"], button {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border-radius: 40px;
+  border: 1px solid #ccc;
+}
+
+input[type="text"]:focus, input[type="file"]:focus, button:focus {
+  outline: none;
+  border-color: #1eac9d;
+}
+
+button {
+  background-color: #045a5b;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: rgba(21, 180, 150, 0.9);
+  background-color: #1eac9d;
 }
 
-input, button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-}
-
+/* Lista de Livros */
 ul {
   list-style-type: none;
-  padding-left: 0;
+  padding: 0;
+  margin-top: 30px;
 }
 
 ul li {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  background-color: #ff000000;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 ul li img {
-  max-width: 100px;
-  margin-top: 10px;
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+ul li span {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #e20101;
+  flex-grow: 1;
+}
+
+ul li button {
+  background-color: #ff5f5f;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+ul li button:hover {
+  background-color: #f44336;
 }
 </style>
