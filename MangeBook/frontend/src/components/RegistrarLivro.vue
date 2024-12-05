@@ -1,32 +1,40 @@
 <template>
-  <div class="register-book">
-    <h1>Cadastrar Livro</h1>
-    <form @submit.prevent="submitBook">
-      <input 
-        type="text" 
-        v-model="title" 
-        placeholder="Título" 
-        required 
-      />
-      <input 
-        type="text" 
-        v-model="author" 
-        placeholder="Autor" 
-        required 
-      />
-      <textarea 
-        v-model="description" 
-        placeholder="Descrição" 
-        required 
-      ></textarea>
-      <input 
-        type="file" 
-        @change="handleImageUpload" 
-      />
-      <button type="submit">Cadastrar Livro</button>
-    </form>
+  <div>
+    <h1>Book Management</h1>
 
-    <div v-if="message" :class="messageType">{{ message }}</div>
+    <!-- Adicionar livro -->
+    <div>
+      <h2>Add Book</h2>
+      <input v-model="book.title" placeholder="Title" />
+      <input v-model="book.author" placeholder="Author" />
+      <input v-model="book.description" placeholder="Description" />
+      <input type="file" @change="handleFileUpload" />
+      <button @click="addBook">Add</button>
+    </div>
+
+    <!-- Listar livros -->
+    <div>
+      <h2>Book List</h2>
+      <ul>
+        <li v-for="book in books" :key="book._id">
+          <!-- Exibindo a imagem -->
+          <img v-if="book.image" :src="`http://localhost:5000${book.image}`" alt="Book Image" width="100" />
+          <span>{{ book.title }} - {{ book.author }}</span>
+          <button @click="editBook(book)">Edit</button>
+          <button @click="removeBook(book._id)">Remove</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Editar livro -->
+    <div v-if="editingBook">
+      <h2>Edit Book</h2>
+      <input v-model="editingBook.title" placeholder="Title" />
+      <input v-model="editingBook.author" placeholder="Author" />
+      <input v-model="editingBook.description" placeholder="Description" />
+      <input type="file" @change="handleFileUpload" />
+      <button @click="saveEdit">Save</button>
+    </div>
   </div>
 </template>
 
@@ -36,106 +44,135 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      title: '',
-      author: '',
-      description: '',
-      image: null,
-      message: '',
-      messageType: 'success', // Success or error message
+      books: [],
+      book: {
+        title: '',
+        author: '',
+        description: '',
+        image: null, // Novo campo para armazenar a imagem
+      },
+      editingBook: null,
     };
   },
+  mounted() {
+    this.listBooks();
+  },
   methods: {
-    handleImageUpload(event) {
-      this.image = event.target.files[0];
-    },
-    submitBook() {
-      const formData = new FormData();
-      formData.append('title', this.title);
-      formData.append('author', this.author);
-      formData.append('description', this.description);
-      if (this.image) {
-        formData.append('image', this.image);
+    // Método para listar todos os livros
+    async listBooks() {
+      try {
+        const response = await axios.get('http://localhost:5000/books');
+        console.log(response.data); // Verifique aqui o que está retornando, especialmente o campo 'image'
+        this.books = response.data;
+      } catch (error) {
+        console.error(error);
       }
-
-      axios.post('http://localhost:5000/api/books', formData)
-        .then(response => {
-          this.message = 'Livro cadastrado com sucesso!';
-          this.messageType = 'success';
-          this.clearForm();
-        })
-        .catch(error => {
-          this.message = 'Erro ao cadastrar livro!';
-          this.messageType = 'error';
-        });
     },
-    clearForm() {
-      this.title = '';
-      this.author = '';
-      this.description = '';
-      this.image = null;
+
+    // Método para lidar com o upload de arquivos
+    handleFileUpload(event) {
+      // Se estiver editando um livro, atualiza a imagem do livro em edição
+      if (this.editingBook) {
+        this.editingBook.image = event.target.files[0];
+      } else {
+        this.book.image = event.target.files[0]; // Atualiza a imagem para o novo livro
+      }
+    },
+
+    // Método para adicionar um novo livro
+    async addBook() {
+      const formData = new FormData();
+      formData.append('title', this.book.title);
+      formData.append('author', this.book.author);
+      formData.append('description', this.book.description);
+      if (this.book.image) formData.append('image', this.book.image);
+
+      try {
+        const response = await axios.post('http://localhost:5000/books', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        console.log('Book added:', response.data); // Verifique a resposta, incluindo a URL da imagem
+        this.listBooks();
+        this.book = { title: '', author: '', description: '', image: null }; // Limpa os campos
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    // Método para editar um livro
+    editBook(book) {
+      this.editingBook = { ...book };
+    },
+
+    // Método para salvar as edições de um livro
+    async saveEdit() {
+      const formData = new FormData();
+      formData.append('title', this.editingBook.title);
+      formData.append('author', this.editingBook.author);
+      formData.append('description', this.editingBook.description);
+      if (this.editingBook.image) formData.append('image', this.editingBook.image);
+
+      try {
+        await axios.put(`http://localhost:5000/books/${this.editingBook._id}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        this.listBooks();
+        this.editingBook = null;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    // Método para remover um livro
+    async removeBook(id) {
+      try {
+        await axios.delete(`http://localhost:5000/books/${id}`);
+        this.listBooks();
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };
 </script>
 
-
 <style scoped>
-/* Adapte o estilo como necessário para seu design */
-.fundo {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: url('../components/images/FundoLogin.png') no-repeat center center fixed;
-  background-size: cover;
-}
-
-.register-container {
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.register-header h1 {
-  font-size: 24px;
-  color: #045a5b;
-  margin-bottom: 10px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-
-input, textarea {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-}
-
-textarea {
-  height: 100px;
-}
-
+/* Estilo para o frontend */
 button {
-  padding: 12px;
+  padding: 10px;
   background-color: #045a5b;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s;
-  width: 100%;
+  margin: 5px;
 }
 
 button:hover {
   background-color: rgba(21, 180, 150, 0.9);
+}
+
+input, button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+ul li img {
+  max-width: 100px;
+  margin-top: 10px;
 }
 </style>

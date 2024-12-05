@@ -4,6 +4,8 @@ import Register from '../src/components/Register.vue';
 import Home from '../src/views/Home.vue';
 import MenuInicial from '../src/views/MenuIncial.vue';
 import RegistarLivro from '../src/components/RegistrarLivro.vue';
+import catalago from '../src/components/catalago.vue';
+import Dashboard from '../src/views/Dashboard.vue';
 
 const routes = [
   {
@@ -30,6 +32,16 @@ const routes = [
       path: '/RegistarLivro',
       name: 'RegistarLivro',
       component: RegistarLivro
+    },
+     {
+      path: '/catalago',
+      name: 'catalago',
+      component: catalago
+    },
+     {
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: Dashboard
     },
   ];
   

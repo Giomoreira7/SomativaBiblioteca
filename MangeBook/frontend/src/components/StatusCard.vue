@@ -1,36 +1,60 @@
 <template>
-    <div class="dashboard">
-      <h1>Dashboard</h1>
-      <div class="status-section">
-        <StatusCard title="Empréstimos" :count="loanCount" icon="book" />
-        <StatusCard title="Devoluções" :count="returnCount" icon="recycle" />
-        <StatusCard title="Reservas" :count="reservationCount" icon="calendar" />
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  import StatusCard from "@/components/StatusCard.vue"; // Importando o StatusCard
-  
-  export default {
-    components: {
-      StatusCard, // Registrando o StatusCard como componente
-    },
-    data() {
-      return {
-        loanCount: 120, 
-        returnCount: 50,
-        reservationCount: 30,
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
-  /* Estilos do Dashboard */
-  .status-section {
-    display: flex;
-    justify-content: space-around;
+  <div class="chart-container">
+    <h2>Quantidade de Logins</h2>
+    <canvas ref="loginCanvas"></canvas>
+  </div>
+</template>
+
+<script>
+import { Chart } from 'chart.js';
+
+export default {
+  name: 'LoginChart',
+  data() {
+    return {
+      loginData: [120, 150, 180, 220, 300],
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+    };
+  },
+  mounted() {
+    this.renderLoginChart();
+  },
+  methods: {
+    renderLoginChart() {
+      new Chart(this.$refs.loginCanvas, {
+        type: 'line',
+        data: {
+          labels: this.labels,
+          datasets: [{
+            label: 'Logins por Mês',
+            data: this.loginData,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
   }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.chart-container {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+canvas {
+  max-width: 100%;
+  height: 300px;
+}
+</style>

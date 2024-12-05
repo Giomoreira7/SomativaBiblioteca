@@ -1,166 +1,113 @@
 <template>
-  <div>
-    <header class="header">
-      <div class="logo">
-        <img src="../components/images/logo.png" alt="Logo da Biblioteca" />
+  <div class="chart-container">
+    <!-- Div para os dois gráficos lado a lado -->
+    <div class="charts-row">
+      <!-- Gráfico de Pizza -->
+      <div class="chart">
+        <h2>Quantidade de Logins - Pizza</h2>
+        <PieChart :data="pieChartData" :options="chartOptions" />
       </div>
-      <h1>Dashboard - Biblioteca</h1>
-    </header>
-
-    <nav>
-      <ul>
-        <li><router-link to="/">Início</router-link></li>
-        <li><router-link to="/book-list">Livros</router-link></li>
-        <li><router-link to="/usuarios">Usuários</router-link></li>
-        <li><router-link to="/relatorios">Relatórios</router-link></li>
-        <li><router-link to="/configuracoes">Configurações</router-link></li>
-      </ul>
-    </nav>
-
-    <div class="dashboard">
-      <header>
-        <div class="action-icons">
-          <i class="fa fa-book" @click="addBook" title="Adicionar Livro"></i>
-          <i class="fa fa-users" @click="manageUsers" title="Gerenciar Usuários"></i>
-        </div>
-      </header>
-
-      <section class="status-cards">
-        <div class="card">
-          <h2>Empréstimos</h2>
-          <p>{{ loanStatus }}</p>
-        </div>
-        <div class="card">
-          <h2>Devoluções</h2>
-          <p>{{ returnStatus }}</p>
-        </div>
-        <div class="card">
-          <h2>Reservas</h2>
-          <p>{{ reservationStatus }}</p>
-        </div>
-      </section>
+      <!-- Gráfico de Linha -->
+      <div class="chart">
+        <h2>Quantidade de Logins - Linha</h2>
+        <LineChart :data="lineChartData" :options="chartOptions" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+// Importando o necessário do vue-chartjs e Chart.js
+import { defineComponent } from 'vue';
+import { Pie, Line } from 'vue-chartjs';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, LineElement, CategoryScale, LinearScale } from 'chart.js';
 
-export default {
+// Registrando os componentes necessários do Chart.js
+ChartJS.register(Title, Tooltip, Legend, ArcElement, LineElement, CategoryScale, LinearScale);
+
+export default defineComponent({
+  name: 'DashboardChart',
+  components: {
+    PieChart: Pie,
+    LineChart: Line,
+  },
   data() {
     return {
-      loanStatus: '',
-      returnStatus: '',
-      reservationStatus: ''
+      // Dados do gráfico de Pizza
+      pieChartData: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'], // Rótulos do gráfico
+        datasets: [
+          {
+            label: 'Logins por Mês',
+            data: [120, 150, 180, 220, 300], // Dados para o gráfico de pizza
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+            ], // Cores para cada fatia da pizza
+            borderColor: [
+              'rgba(75, 192, 192, 1)',
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+            ], // Cores das bordas
+            borderWidth: 1, // Largura da borda
+          },
+        ],
+      },
+
+      // Dados do gráfico de Linha
+      lineChartData: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'], // Rótulos do eixo X
+        datasets: [
+          {
+            label: 'Logins por Mês',
+            data: [120, 150, 180, 220, 300], // Dados do gráfico
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true, // Preencher a área abaixo da linha
+            tension: 0.1, // Ajustando a suavização da linha
+          },
+        ],
+      },
+
+      // Opções comuns para ambos os gráficos
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top', // Posicionar a legenda no topo
+          },
+        },
+      },
     };
   },
-  mounted() {
-    this.fetchDashboardData();
-  },
-  methods: {
-    fetchDashboardData() {
-      axios.get('http://localhost:3000/api/dashboard')
-        .then(response => {
-          this.loanStatus = response.data.loanStatus;
-          this.returnStatus = response.data.returnStatus;
-          this.reservationStatus = response.data.reservationStatus;
-        })
-        .catch(error => {
-          console.error("Houve um erro ao buscar os dados: ", error);
-        });
-    },
-    addBook() {
-      // Lógica para adicionar um novo livro
-      alert("Adicionar livro");
-    },
-    manageUsers() {
-      // Lógica para gerenciar usuários
-      alert("Gerenciar usuários");
-    }
-  }
-};
+});
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background-color: #045A5B;
-  padding: 0;
-}
-
-header {
-  background-color: #ffffff;
-  color: #045A5B;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header .logo img {
-  height: 70px;
-}
-
-header h1 {
-  font-size: 24px;
-  color: #045A5B;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  background-color: #045A5B;
-}
-
-nav ul li {
-  margin: 0 15px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.dashboard {
+.chart-container {
+  margin: 0 auto;
   padding: 20px;
 }
 
-.action-icons i {
-  font-size: 24px;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.status-cards {
+.charts-row {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  gap: 20px; /* Espaçamento entre os gráficos */
 }
 
-.card {
-  background-color: #f4f4f4;
-  padding: 20px;
-  width: 30%;
-  text-align: center;
-  border-radius: 8px;
+.chart {
+  width: 48%; /* Cada gráfico ocupa 48% do espaço disponível */
+  height: 400px; /* Definindo uma altura fixa para o gráfico */
 }
 
-.card h2 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 18px;
-  color: #333;
+canvas {
+  width: 100%;
+  height: 100%;
 }
 </style>

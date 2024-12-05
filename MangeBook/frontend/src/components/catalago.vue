@@ -21,7 +21,24 @@
       <div class="categoria" v-for="(categoria, index) in categoriasLivros" :key="index">
         <h2>{{ categoria.nome }}</h2>
         <div class="livros-grid">
-          <div v-for="(livro, index) in categoria.livros" :key="index" class="livro">
+          <!-- Exibe os livros filtrados ou todos os livros -->
+          <div v-for="(livro, index) in filteredLivros.length ? filteredLivros : categoria.livros" :key="index" class="livro">
+            <img :src="livro.imagem" :alt="livro.titulo" />
+            <div class="descricao">
+              <div class="avaliacao">{{ livro.avaliacao }}</div>
+              <div class="titulo">{{ livro.titulo }}</div>
+              <div class="autor">Autor: {{ livro.autor }}</div>
+              <div class="disponibilidade">Disponível: {{ livro.disponibilidade }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção de Livros Recentemente Adicionados -->
+      <div class="categoria" v-if="recentBooks.length">
+        <h2>Livros Recentemente Adicionados</h2>
+        <div class="livros-grid">
+          <div v-for="(livro, index) in recentBooks" :key="index" class="livro">
             <img :src="livro.imagem" :alt="livro.titulo" />
             <div class="descricao">
               <div class="avaliacao">{{ livro.avaliacao }}</div>
@@ -34,9 +51,9 @@
       </div>
     </section>
 
-    <!-- Botão para se cadastrar -->
+    <!-- Botão para adicionar novo livro -->
     <div class="container-cadastre">
-      <router-link to="/register" class="btn-cadastre-mais">Se cadastre para mais</router-link>
+      <router-link to="/RegistarLivro" class="btn-cadastre-mais">Adicionar Novo Livro</router-link>
     </div>
 
     <!-- Rodapé -->
@@ -48,11 +65,11 @@
         <p>© 2024 Todos os direitos reservados, Mange Library ®</p>
       </div>
       <div class="footer-direita">
-      
       </div>
     </footer>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -86,7 +103,8 @@ export default {
         { imagem: require('../components/images/Livro25.jpg'), avaliacao: "★★★★★", titulo: "Israel x Palestina: 100 Anos de Guerra", autor: "James L. Gelvin", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: "Stephanie Garber", categoria: "Romance", disponibilidade: "Não" }
       ],
-      filteredLivros: []
+ filteredLivros: [], // Livros filtrados com base na pesquisa
+      recentBooks: [] // Livros recentemente adicionados
     };
   },
   computed: {
@@ -94,7 +112,7 @@ export default {
       const categories = ['Ficção', 'Romance', 'Mistério', 'Ciência', 'História'];
       return categories.map(categoria => ({
         nome: categoria,
-        livros: this.livros.filter(livro => livro.categoria === categoria)
+        livros: this.livros.filter(livro => livro.categoria === categoria),
       }));
     }
   },
@@ -102,16 +120,31 @@ export default {
     searchBooks() {
       if (this.searchQuery) {
         this.filteredLivros = this.livros.filter(livro =>
-          livro.titulo.toLowerCase().includes(this.searchQuery.toLowerCase())
+          livro.titulo.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          livro.autor.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       } else {
         this.filteredLivros = [];
       }
+    },
+    addBook(newBook) {
+      // Adiciona o livro na lista principal
+      this.livros.push(newBook);
+      // Adiciona o livro à lista de livros recentes
+      this.recentBooks.push(newBook);
+      // Limita o número de livros recentemente adicionados a, por exemplo, 5
+      if (this.recentBooks.length > 5) {
+        this.recentBooks.shift(); // Remove o livro mais antigo
+      }
+    }
+  },
+  watch: {
+    searchQuery(newQuery) {
+      this.searchBooks();
     }
   }
 };
 </script>
-
 <style scoped>
 
 * {
