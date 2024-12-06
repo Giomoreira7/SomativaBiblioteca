@@ -8,9 +8,7 @@
       <nav>
         <ul>
           <li><router-link to="/">Início</router-link></li>
-          <li><a href="/Login">Login</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="/Login">Administrador</a></li>
+          <li><a href="/Menunicial">Menu Inicial</a></li>
         </ul>
       </nav>
       <div class="search-bar">
@@ -154,7 +152,7 @@ export default {
 </script>
 
 <style scoped>
-/* Estilo global */
+/* Reset básico para garantir que o layout seja consistente */
 * {
   margin: 0;
   padding: 0;
@@ -162,151 +160,176 @@ export default {
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #ff0000;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   color: #333;
   line-height: 1.6;
-  padding: 20px;
-  text-align: center;
 }
 
-/* Cabeçalho */
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilo para o cabeçalho */
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
-  max-width: 100%;
+  align-items: center;
+  background-color: #ffffff;
+  color: #045a5b;
+  padding: 10px 20px;
 }
 
 .header .logo img {
-  width: 150px;
-  border-radius: 10px;
+  max-width: 150px;
 }
 
-header nav ul {
-  display: flex;
-  gap: 20px;
+.header nav ul {
   list-style: none;
+  display: flex;
 }
 
-header nav ul li a {
-  color: #045a5b;
+.header nav ul li {
+  margin-right: 20px;
+}
+
+.header nav ul li:last-child {
+  margin-right: 0;
+}
+
+.header nav ul li a {
+  color:  #045a5b;
   text-decoration: none;
   font-weight: bold;
 }
 
-/* Barra de pesquisa */
-.search-bar {
+.header .search-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-.search-bar input {
-  padding: 100px;
-  border-radius: 50px;
-  border: 1px solid #ff0000;
+.header .search-bar input {
+  padding: 5px;
   margin-right: 10px;
+  font-size: 14px;
+  width: 200px;
 }
 
-.search-bar button {
-  background-color:  #045a5b;
-  color: white;
-  padding: 10px;
+.header .search-bar button {
+  padding: 5px 10px;
+  background-color: #045a5b;
   border: none;
-  border-radius: 5px;
+  color: white;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.search-bar button:hover {
-  background-color: #0bc4c7;
+.header .search-bar button:hover {
+  background-color: #13744b;
 }
 
-/* Formulário de Adicionar Livro */
+/* Estilo para o formulário de adicionar/editar livro */
 .form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #13744b
 }
 
-h2 {
-  color: #333;
+.form-container h2 {
   margin-bottom: 20px;
 }
 
-/* Inputs e botões */
-input[type="text"], input[type="file"], button {
+.form-container input {
+  display: block;
   width: 100%;
-  max-width: 400px;
   padding: 10px;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  border-radius: 40px;
-  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border: 1px solid #13744b;
+  border-radius: 5px;
 }
 
-input[type="text"]:focus, input[type="file"]:focus, button:focus {
-  outline: none;
-  border-color: #1eac9d;
-}
-
-button {
+.form-container button {
+  padding: 10px 20px;
   background-color: #045a5b;
+  border: none;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
 }
 
-button:hover {
-  background-color: #1eac9d;
+.form-container button:hover {
+  background-color: #13744b;
 }
 
-/* Lista de Livros */
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 30px;
+/* Estilo para a lista de livros */
+.list-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px#13744b;
 }
 
-ul li {
-  background-color: #ff000000;
-  padding: 15px;
-  border-radius: 4px;
-  margin-bottom: 10px;
+.list-container h2 {
+  margin-bottom: 20px;
+}
+
+.list-container ul {
+  list-style: none;
+}
+
+.list-container ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-ul li img {
-  width: 50px;
-  height: 75px;
-  object-fit: cover;
-  border-radius: 4px;
+.list-container ul li img {
+  border-radius: 5px;
   margin-right: 15px;
 }
 
-ul li span {
-  font-size: 1rem;
-  font-weight: normal;
-  color: #e20101;
-  flex-grow: 1;
-}
-
-ul li button {
-  background-color: #ff5f5f;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 4px;
+.list-container ul li button {
+  padding: 5px 10px;
+  background-color: #d9534f;
   border: none;
+  color: white;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
-ul li button:hover {
-  background-color: #f44336;
+.list-container ul li button:hover {
+  background-color: #c9302c;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header .search-bar {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .form-container input,
+  .form-container button {
+    width: 100%;
+  }
+
+  .list-container ul li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>
