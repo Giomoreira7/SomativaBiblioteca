@@ -84,6 +84,10 @@ export default {
         { imagem: require('../components/images/Livro8.jpg'), avaliacao: "★★★★★", titulo: "A sociedade oculta de Londres", autor: "Sarah Penner", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro9.jpg'), avaliacao: "★★★★★", titulo: "O crime do bom nazista", autor: "Samir Machado de Machado", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro10.jpg'), avaliacao: "★★★★★", titulo: "O preço da vitória", autor: "Harlan Coben", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro39.jpg'), avaliacao: "★★★★★", titulo: "A mulher na janela", autor: " A. J. Finn", categoria: "Mistério", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro40.jpg'), avaliacao: "★★★★★", titulo: "Uma mulher no escuro", autor: " Raphael Montes ", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro41.jpg'), avaliacao: "★★★★★", titulo: "Battle Royale", autor: " Koushun Takami ", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro42.jpg'), avaliacao: "★★★★★", titulo: "A contadora", autor: " Freida McFadden", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro16.jpg'), avaliacao: "★★★★☆", titulo: "Outlive: A arte e a ciência de viver mais e melhor", autor: "Peter Attia", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro1.jpg'), avaliacao: "★★★★★", titulo: "O Hobbit + pôster", autor: "J.R.R. Tolkien", categoria: "Ficção", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro2.jpg'), avaliacao: "★★★★★", titulo: "Tudo é rio", autor: "Carla Madeira", categoria: "Ficção", disponibilidade: "Não" },
@@ -94,6 +98,10 @@ export default {
         { imagem: require('../components/images/Livro19.jpg'), avaliacao: "★★★★★", titulo: "Darwin sem frescura", autor: "Reinaldo José Lopes", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro12.jpg'), avaliacao: "★★☆☆☆", titulo: "O morro dos ventos uivantes", autor: "Emily Brontë", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro20.jpg'), avaliacao: "★★★★☆", titulo: "Os mistérios do Universo", autor: "Will Gater", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro43.jpg'), avaliacao: "★★★★☆", titulo: "Uma breve história do tempo", autor: " Stephen Hawking", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro44.jpg'), avaliacao: "★★★★☆", titulo: "Pálido ponto azul", autor: "Carl Sagan", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro45.jpg'), avaliacao: "★★★★☆", titulo: "Doppelgänger", autor: " Naomi Klein", categoria: "Ciência", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro46.jpg'), avaliacao: "★★★★☆", titulo: "O oráculo da noite", autor: "Sidarta Ribeiro", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro13.jpg'), avaliacao: "★★★★☆", titulo: "É Assim que Acaba", autor: "Colleen Hoover", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro14.jpg'), avaliacao: "★★★★☆", titulo: "Vergonha", autor: "Brittainy Cherry", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro15.jpg'), avaliacao: "★★★★☆", titulo: "Imperfeitos", autor: "Christina Lauren", categoria: "Romance", disponibilidade: "Não" },
@@ -102,13 +110,25 @@ export default {
         { imagem: require('../components/images/Livro27.jpg'), avaliacao: "★★★★☆", titulo: "A metamorfose: DIE VERWANDLUNG", autor: " Franz Kafka", categoria: "Ficção", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro26.jpg'), avaliacao: "★★★★☆", titulo: "Vidas secas", autor: "Graciliano Ramos", categoria: "Ficção", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro4.jpg'), avaliacao: "★★★★★", titulo: "A Biblioteca da Meia-Noite", autor: "Matt Haig", categoria: "Ficção", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro35.jpg'), avaliacao: "★★★★★", titulo: "5 Lições de Storytelling", autor: " James McSill", categoria: "Ficção", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro36.jpg'), avaliacao: "★★★★★", titulo: "Fogo & Sangue ", autor: " George R. R. Martin ", categoria: "Ficção", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro37.jpg'), avaliacao: "★★★★★", titulo: "Eu, Robô ", autor: " Isaac Asimov ", categoria: "Ficção", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro38.jpg'), avaliacao: "★★★★★", titulo: "Contos de fadas dos irmãos Grimm", autor: " Irmãos Grimm", categoria: "Ficção", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro23.jpg'), avaliacao: "★★★★★", titulo: "O perigo de uma história única", autor: "Chimamanda Ngozi Adichie", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro24.jpg'), avaliacao: "★★★★★", titulo: "O queijo e os vermes", autor: "Carlo Ginzburg", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro25.jpg'), avaliacao: "★★★★★", titulo: "Israel x Palestina: 100 Anos de Guerra", autor: "James L. Gelvin", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro30.jpg'), avaliacao: "★★★★★", titulo: "Como a loucura mudou a História", autor: "Christopher Ferguson", categoria: "História", disponibilidade: "Sim" },
-        { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: "Stephanie Garber", categoria: "Romance", disponibilidade: "Não" }
+        { imagem: require('../components/images/Livro47.jpg'), avaliacao: "★★★★★", titulo: "Segunda Guerra História Ilustrada em 300 Fotos", autor: " Cláudio Blanc ", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro48.jpg'), avaliacao: "★★★★★", titulo: "Assassinos da Lua das Flores: Petróleo, morte e a origem do FBI ", autor: " David Grann ", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro49.jpg'), avaliacao: "★★★★★", titulo: "O despertar de tudo: Uma nova história da humanidade", autor: " David Graeber", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro50.jpg'), avaliacao: "★★★★★", titulo: "Pré-história", autor: " Chris Gosden ", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: "Stephanie Garber", categoria: "Romance", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro31.jpg'), avaliacao: "★★★★☆", titulo: "Mil batidas do coração", autor: "Kiera Cass", categoria: "Romance", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro32.jpg'), avaliacao: "★★★★☆", titulo: "É assim que começa", autor: " Colleen Hoover", categoria: "Romance", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro33.jpg'), avaliacao: "★★★★☆", titulo: "Eu e Esse meu Coração", autor: " C. C. Hunter", categoria: "Romance", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro34.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: "Erin Doom ", categoria: "Romance", disponibilidade: "Não" }
       ],
- filteredLivros: [], // Livros filtrados com base na pesquisa
+      filteredLivros: [], // Livros filtrados com base na pesquisa
       recentBooks: [] // Livros recentemente adicionados
     };
   },
@@ -150,8 +170,8 @@ export default {
   }
 };
 </script>
-<style scoped>
 
+<style scoped>
 * {
   margin: 0;
   padding: 0;
@@ -188,7 +208,7 @@ header nav ul li {
 
 header nav ul li a {
   text-decoration: none;
-  color:  #045A5B;
+  color: #045A5B;
   font-weight: bold;
   margin-left: 100px;
 }
@@ -205,7 +225,7 @@ header .search-bar input {
 
 header .search-bar button {
   padding: 6px 12px;
-  background-color:  #045A5B;
+  background-color: #045A5B;
   border: none;
   color: white;
   cursor: pointer;
@@ -214,6 +234,9 @@ header .search-bar button {
 /* Seção de Livros */
 .livros {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .livros .categoria h2 {
@@ -225,6 +248,9 @@ header .search-bar button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
+  justify-items: center; /* Isso vai centralizar os itens dentro da grid */
+  max-width: 1200px; /* Define uma largura máxima para a grid */
+  margin: 0 auto; /* Centraliza a grid dentro do container */
 }
 
 .livro {
@@ -292,7 +318,7 @@ header .search-bar button {
 footer {
   display: flex;
   justify-content: space-between;
-  background-color:  #045A5B;
+  background-color: #045A5B;
   color: white;
   padding: 10px 20px;
 }
@@ -302,11 +328,11 @@ footer .footer-esquerda, footer .footer-centro, footer .footer-direita {
 }
 
 footer .footer-direita a {
-  margin-right: 10px;
+  text-decoration: none;
+  color: white;
 }
 
-footer .footer-direita img {
-  width: 30px;
-  height: 30px;
+footer .footer-centro p {
+  text-align: center;
 }
 </style>
