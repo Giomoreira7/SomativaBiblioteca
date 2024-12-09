@@ -79,6 +79,7 @@ export default {
       livros: [
         { imagem: require('../components/images/Livro11.jpg'), avaliacao: "★★★★☆", titulo: "Em rota de colisão", autor: "Bal Khabra", categoria: "Romance", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro6.jpg'), avaliacao: "★★★★★", titulo: "O túmulo veloz", autor: "Robert Galbraith", categoria: "Mistério", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro28.jpg'), avaliacao: "★★★★★", titulo: "Oito Assassinatos Perfeitos", autor: " Peter Swanson ", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro7.jpg'), avaliacao: "★★★★★", titulo: "Depois daquela noite", autor: "Karin Slaughter", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro8.jpg'), avaliacao: "★★★★★", titulo: "A sociedade oculta de Londres", autor: "Sarah Penner", categoria: "Mistério", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro9.jpg'), avaliacao: "★★★★★", titulo: "O crime do bom nazista", autor: "Samir Machado de Machado", categoria: "Mistério", disponibilidade: "Não" },
@@ -89,6 +90,7 @@ export default {
         { imagem: require('../components/images/Livro21.jpg'), avaliacao: "★★★★☆", titulo: "1499: O Brasil antes de Cabral", autor: "Reinaldo José Lopes", categoria: "História", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro17.jpg'), avaliacao: "★★★★☆", titulo: "Apaixone-se pelo problema, não pela solução", autor: "Uri Levine", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro18.jpg'), avaliacao: "★★★★☆", titulo: "Uma breve história do tempo", autor: "Stephen Hawking", categoria: "Ciência", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro29.jpg'), avaliacao: "★★★★☆", titulo: "Detetives da aviação", autor: "Christine Negroni", categoria: "Ciência", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro19.jpg'), avaliacao: "★★★★★", titulo: "Darwin sem frescura", autor: "Reinaldo José Lopes", categoria: "Ciência", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro12.jpg'), avaliacao: "★★☆☆☆", titulo: "O morro dos ventos uivantes", autor: "Emily Brontë", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro20.jpg'), avaliacao: "★★★★☆", titulo: "Os mistérios do Universo", autor: "Will Gater", categoria: "Ciência", disponibilidade: "Sim" },
@@ -97,10 +99,13 @@ export default {
         { imagem: require('../components/images/Livro15.jpg'), avaliacao: "★★★★☆", titulo: "Imperfeitos", autor: "Christina Lauren", categoria: "Romance", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro22.jpg'), avaliacao: "★★★★☆", titulo: "Sobreviventes e guerreiras: Uma breve história da mulher no Brasil de 1500 a 2000", autor: "Mary del Priore", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro3.jpg'), avaliacao: "★★★★☆", titulo: "A empregada", autor: "Freida McFadden", categoria: "Ficção", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro27.jpg'), avaliacao: "★★★★☆", titulo: "A metamorfose: DIE VERWANDLUNG", autor: " Franz Kafka", categoria: "Ficção", disponibilidade: "Não" },
+        { imagem: require('../components/images/Livro26.jpg'), avaliacao: "★★★★☆", titulo: "Vidas secas", autor: "Graciliano Ramos", categoria: "Ficção", disponibilidade: "Não" },
         { imagem: require('../components/images/Livro4.jpg'), avaliacao: "★★★★★", titulo: "A Biblioteca da Meia-Noite", autor: "Matt Haig", categoria: "Ficção", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro23.jpg'), avaliacao: "★★★★★", titulo: "O perigo de uma história única", autor: "Chimamanda Ngozi Adichie", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro24.jpg'), avaliacao: "★★★★★", titulo: "O queijo e os vermes", autor: "Carlo Ginzburg", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro25.jpg'), avaliacao: "★★★★★", titulo: "Israel x Palestina: 100 Anos de Guerra", autor: "James L. Gelvin", categoria: "História", disponibilidade: "Sim" },
+        { imagem: require('../components/images/Livro30.jpg'), avaliacao: "★★★★★", titulo: "Como a loucura mudou a História", autor: "Christopher Ferguson", categoria: "História", disponibilidade: "Sim" },
         { imagem: require('../components/images/Livro5.jpg'), avaliacao: "★★★★☆", titulo: "Era uma vez um coração partido", autor: "Stephanie Garber", categoria: "Romance", disponibilidade: "Não" }
       ],
  filteredLivros: [], // Livros filtrados com base na pesquisa
@@ -185,7 +190,7 @@ header nav ul li a {
   text-decoration: none;
   color:  #045A5B;
   font-weight: bold;
-  margin-left: 1000px;
+  margin-left: 100px;
 }
 
 header .search-bar {

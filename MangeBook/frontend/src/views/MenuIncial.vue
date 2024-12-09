@@ -18,7 +18,6 @@
         <img src="../components/images/FundoAdm.png" alt="fundo adm" />
         <button @click="goToDashboard">Dashboard</button>
         <button @click="goToRegistrarLivro">Registrar Livro</button>
-        <button @click="goToBookList">Lista de Livros</button>
       </section>
     </div>
   </template>

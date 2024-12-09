@@ -48,8 +48,8 @@
         <router-link to="/catalago" class="categoria">Ficção</router-link>
         <router-link to="/catalago" class="categoria">Mistério</router-link>
         <router-link to="/catalago" class="categoria">Romance</router-link>
-        <router-link to="/catalogo" class="categoria">Ciência</router-link>
-        <router-link to="/catalogo" class="categoria">História</router-link>
+        <router-link to="/catalago" class="categoria">Ciência</router-link>
+        <router-link to="/catalago" class="categoria">História</router-link>
       </div>
     </section>
 
