@@ -239,7 +239,7 @@ body {
   box-shadow: 0 2px 5px #13744b
 }
 
-.form-container h2 {
+.form-container h2 {  
   margin-bottom: 20px;
 }
 
