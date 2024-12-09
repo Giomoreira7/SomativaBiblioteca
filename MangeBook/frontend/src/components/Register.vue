@@ -16,7 +16,7 @@
           type="email" 
           v-model="email" 
           placeholder="Email" 
-          required 
+          required
         />
         <input 
           type="password" 
